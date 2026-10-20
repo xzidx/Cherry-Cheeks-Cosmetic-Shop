@@ -1,22 +1,19 @@
-function Products() {
+import ProductCard from "../../components/user/ProductCard";
+function App() {
   return (
-    <div className=" bg-pink-50 p-8 text-center">
-      <h1 className="mb-4 text-3xl font-bold text-pink-600">
-        Our Products 💄
-      </h1>
 
-      <p className="mb-8 text-gray-600">
-        Discover your favorite beauty products at Cherry Cheeks.
-      </p>
+    
+    <div className="min-h-screen bg-slate-50">
+      <header className="bg-white shadow-sm py-4 px-6">
+        <h1 className="text-xl font-bold text-slate-900">My Beauty Store</h1>
+      </header>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl bg-white p-6 shadow">
-          <h2 className="text-xl font-semibold">Lip Gloss</h2>
-          <p className="mt-2 text-pink-600">$8</p>
-        </div>
-      </div>
+      {/* Using your ProductList component here */}
+      <main>
+        <ProductCard />
+      </main>
     </div>
   );
 }
 
-export default Products;
+export default App;
