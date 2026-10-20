@@ -1,10 +1,11 @@
+import ProductGrid from "../../components/user/ProductGrid";
 
 function Home() {
   return (
-    <div style={{ padding: "40px", color: "#333" }}>
-      <h1>Welcome to Cherry Cheeks!</h1>
-      <p>Your cosmetic shop website is working.</p>
-    </div>
+    <main className="p-6">
+      <h1 className="mb-6 text-3xl font-bold">Our Products</h1>
+      <ProductGrid />
+    </main>
   );
 }
 
