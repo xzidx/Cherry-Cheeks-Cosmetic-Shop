@@ -30,22 +30,29 @@ const products = [
     image: "https://placehold.co/400x400?text=Blush",
     category: "Makeup",
   },
+  {
+    id: 5,
+    name: "Vitamin C Serum",
+    price: 22.99,
+    image: "https://placehold.co/400x400?text=Vitamin+C+Serum",
+    category: "Skincare",
+  },
 ];
 
 function ProductGrid({ products: productList = products }) {
-  if (productList.length === 0) {
-    return (
-      <p className="py-10 text-center text-gray-500">
-        No products available.
-      </p>
-    );
-  }
-
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {productList.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {productList.length === 0 ? (
+        <p className="py-10 text-center text-gray-500">
+          No products available.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {productList.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
