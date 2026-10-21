@@ -36,7 +36,7 @@ export default function Footer() {
     "text-sm text-[#6b6a80] transition hover:text-[#fb5c8c]";
 
   return (
-    <footer className="bg-[#fdf2f5] font-sans text-[#6b6a80]">
+    <footer className=" font-sans text-[#6b6a80]">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:grid-cols-2 md:grid-cols-4 md:gap-10 md:px-8 md:py-12">
 
         {/* Brand */}
