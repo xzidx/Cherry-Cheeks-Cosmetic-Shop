@@ -41,7 +41,7 @@ const products = [
 
 function ProductGrid({ products: productList = products }) {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-2">
       {productList.length === 0 ? (
         <p className="py-10 text-center text-gray-500">
           No products available.
