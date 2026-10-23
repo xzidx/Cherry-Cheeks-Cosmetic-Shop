@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { User, Mail, Lock, Phone, Eye, EyeOff, Sparkles, ArrowRight, Heart } from 'lucide-react';
+import { Mail, Lock, User, Phone, Eye, EyeOff, ArrowRight, Sparkles, ShieldCheck, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import logo from "../../assets/logo.png";
 
-export default function Register() {
+export default function RegisterConcept2() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,228 +29,214 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF0F3] via-pink-50 to-[#FFE4E8] flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
-      <div className="w-full max-w-5xl bg-white/85 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 border border-white/60">
+    <div className="min-h-screen bg-white flex flex-col lg:flex-row font-sans">
+      
+      {/* Left Brand Panel */}
+      <div 
+        className="lg:w-1/2 p-8 lg:p-16 text-white flex flex-col justify-between relative overflow-hidden min-h-[320px] lg:min-h-screen"
+        style={{ background: 'linear-gradient(135deg, #F66B87 0%, #E05370 100%)' }}
+      >
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2),transparent_50%)]" />
         
-        {/* LEFT COLUMN: Clean White Form Side (Perfect for Pink Logo) */}
-        <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 bg-white flex flex-col justify-between">
-          <div>
-            {/* Logo Area */}
-            <div className="flex items-center space-x-3 mb-6">
-              {/* Replace this div with your <img src="/path-to-logo.png" alt="Cherry Cheeks" className="h-12" /> */}
-              <div className="w-12 h-12 bg-[#FFF0F3] rounded-2xl flex items-center justify-center border border-[#F66B87]/20 text-[#F66B87]">
-                <Sparkles className="w-6 h-6 fill-[#F66B87]" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold tracking-tight leading-none text-[#F66B87]">Cherry Cheeks</h2>
-                <span className="text-[10px] tracking-widest uppercase font-medium text-gray-400">Cosmetic Shop</span>
+        {/* Logo Header */}
+        <div className="relative z-10">
+          <img src={logo} alt="Cherry Cheeks" className="h-16 w-auto brightness-0 invert" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-md my-auto py-10">
+          <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/20 text-xs font-medium mb-4 backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Join Our Team</span>
+          </span>
+          <h1 className="text-4xl lg:text-5xl font-black leading-tight mb-4">
+            Start Your <br /> Beauty Journey
+          </h1>
+          <p className="text-pink-100 text-sm lg:text-base leading-relaxed">
+            Create an account to save your favorite products, unlock exclusive member discounts, and enjoy fast checkout.
+          </p>
+
+          <div className="mt-8 space-y-3">
+            <div className="flex items-center space-x-3 text-xs lg:text-sm text-pink-50">
+              <ShieldCheck className="w-4 h-4 text-pink-200" />
+              <span>100% Authentic Cosmetic Products</span>
+            </div>
+            <div className="flex items-center space-x-3 text-xs lg:text-sm text-pink-50">
+              <Heart className="w-4 h-4 text-pink-200" />
+              <span>Special Rewards & Wishlist Savings</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="relative z-10 text-xs text-pink-200">
+          &copy; 2026 Cherry Cheeks. All rights reserved.
+        </div>
+      </div>
+
+      {/* Right Form Panel */}
+      <div className="lg:w-1/2 p-8 lg:p-16 bg-white flex flex-col justify-center">
+        <div className="max-w-lg w-full mx-auto">
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-gray-900">Create an account</h2>
+            <p className="text-sm text-gray-500 mt-2">Fill in your information to get started with Cherry Cheeks.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Full Name */}
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
+                Full Name
+              </label>
+              <div className="relative">
+                <User className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  placeholder="Chan Samnang"
+                  required
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
+                />
               </div>
             </div>
 
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Create an account</h2>
-              <p className="text-xs text-gray-500 mt-1">Fill in your information to get started.</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Full Name */}
+            {/* Email & Phone Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
-                  Full Name
+                  Email Address
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                    <User className="w-4 h-4" />
-                  </div>
+                  <Mail className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
                   <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    placeholder="Chan Samnang"
+                    placeholder="name@example.com"
                     required
-                    className="w-full pl-10 pr-4 py-2.5 bg-[#FFF5F7] border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
+                    className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
-              {/* Email & Phone Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
-                    Email Address
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="name@example.com"
-                      required
-                      className="w-full pl-10 pr-4 py-2.5 bg-[#FFF5F7] border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
-                    Phone Number
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+855 12 345 678"
-                      className="w-full pl-10 pr-4 py-2.5 bg-[#FFF5F7] border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Password & Confirm Password Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                      <Lock className="w-4 h-4" />
-                    </div>
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      placeholder="••••••••"
-                      required
-                      className="w-full pl-10 pr-10 py-2.5 bg-[#FFF5F7] border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#F66B87] transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
-                    Confirm Password
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                      <Lock className="w-4 h-4" />
-                    </div>
-                    <input
-                      type={showConfirmPassword ? 'text' : 'password'}
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      placeholder="••••••••"
-                      required
-                      className="w-full pl-10 pr-10 py-2.5 bg-[#FFF5F7] border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#F66B87] transition-colors"
-                    >
-                      {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Terms Checkbox */}
-              <div className="flex items-center text-xs py-1">
-                <label className="flex items-start space-x-2 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    name="agreeTerms"
-                    checked={formData.agreeTerms}
-                    onChange={handleChange}
-                    required
-                    className="rounded border-gray-300 text-[#F66B87] focus:ring-[#F66B87] w-4 h-4 mt-0.5"
-                  />
-                  <span className="text-gray-600">
-                    I agree to the{' '}
-                    <a href="#terms" className="text-[#F66B87] font-semibold underline">
-                      Terms of Service
-                    </a>{' '}
-                    and{' '}
-                    <a href="#privacy" className="text-[#F66B87] font-semibold underline">
-                      Privacy Policy
-                    </a>
-                  </span>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
+                  Phone Number
                 </label>
+                <div className="relative">
+                  <Phone className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="+855 12 345 678"
+                    className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Password & Confirm Password Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                    required
+                    className="w-full pl-11 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#F66B87]"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                style={{ backgroundColor: '#F66B87' }}
-                className="w-full mt-2 py-3.5 px-4 text-white font-semibold rounded-xl shadow-lg shadow-[#F66B87]/25 hover:opacity-90 transition-all duration-200 flex items-center justify-center space-x-2 group"
-              >
-                <span>Create Account</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </form>
-          </div>
-
-          <div className="mt-8 text-center text-xs text-gray-500 pt-4 border-t border-gray-100">
-            Already have an account?{' '}
-            <a href="/login" className="text-[#F66B87] font-bold hover:underline">
-              Sign in here
-            </a>
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN: Colorful Brand Hero */}
-        <div 
-          className="lg:col-span-5 p-8 lg:p-12 text-white flex flex-col justify-between relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #F66B87 0%, #E05370 100%)' }}
-        >
-          {/* Ambient Background Orbs */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-pink-300/20 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Badge */}
-          <div className="relative z-10">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-medium text-white border border-white/20">
-              <Heart className="w-3.5 h-3.5 fill-pink-100 text-pink-100" />
-              <span>Join Us Today</span>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                  <input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="••••••••"
+                    required
+                    className="w-full pl-11 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#F66B87] focus:bg-white transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#F66B87]"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* Title / Description */}
-          <div className="relative z-10 my-8 lg:my-0">
-            <h1 className="text-3xl lg:text-4xl font-black leading-tight mb-3">
-              Join Our <br />
-              <span className="text-pink-100">Glow Family</span>
-            </h1>
-            <p className="text-pink-50 text-sm leading-relaxed">
-              Create an account to unlock special beauty perks, save your preferences, and order easily.
-            </p>
-          </div>
+            {/* Terms & Conditions */}
+            <div className="flex items-center text-xs py-1">
+              <label className="flex items-start space-x-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  name="agreeTerms"
+                  checked={formData.agreeTerms}
+                  onChange={handleChange}
+                  required
+                  className="rounded border-gray-300 text-[#F66B87] focus:ring-[#F66B87] w-4 h-4 mt-0.5"
+                />
+                <span className="text-gray-600">
+                  I agree to the{' '}
+                  <a href="#terms" className="text-[#F66B87] font-semibold hover:underline">
+                    Terms of Service
+                  </a>{' '}
+                  and{' '}
+                  <a href="#privacy" className="text-[#F66B87] font-semibold hover:underline">
+                    Privacy Policy
+                  </a>
+                </span>
+              </label>
+            </div>
 
-          <div className="relative z-10 text-[11px] text-pink-100 pt-4 border-t border-white/15">
-            &copy; 2026 Cherry Cheeks. All rights reserved.
-          </div>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              style={{ backgroundColor: '#F66B87' }}
+              className="w-full py-3.5 text-white font-semibold rounded-xl shadow-lg shadow-[#F66B87]/25 hover:opacity-95 transition-all flex items-center justify-center space-x-2 group cursor-pointer mt-2"
+            >
+              <span>Create Account</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </form>
+
+          <p className="mt-8 text-center text-xs text-gray-500">
+            Already have an account?{' '}
+            <Link to="/login" className="text-[#F66B87] font-bold hover:underline">
+              Log in here
+            </Link>
+          </p>
         </div>
-
       </div>
+
     </div>
   );
 }
