@@ -20,9 +20,10 @@ function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      {/* Main Navbar Container */}
+      <div className="mx-auto flex w-full max-w-[1350px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
 
-       {/* Brand Logo */}
+        {/* Brand Logo */}
         <Link
           to="/"
           onClick={closeMenu}
@@ -31,7 +32,7 @@ function Navbar() {
           <img
             src={logo}
             alt="Cherry Cheeks"
-            className="h-14 w-auto object-contain sm:h-16 lg:h-16"
+            className="-ml-3 h-16 w-auto object-contain sm:-ml-4 sm:h-[72px] lg:-ml-5 lg:h-20"
           />
         </Link>
 
@@ -87,8 +88,8 @@ function Navbar() {
 
       {/* Mobile and Tablet Navigation Menu */}
       {menuOpen && (
-        <div className="border-t border-gray-100 bg-white px-6 py-5 lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-5">
+        <div className="border-t border-gray-100 bg-white py-5 lg:hidden">
+          <div className="mx-auto flex w-full max-w-[1350px] flex-col gap-5 px-4 sm:px-6 lg:px-8">
 
             <NavLink
               to="/"
@@ -122,6 +123,7 @@ function Navbar() {
               Contact
             </NavLink>
 
+            {/* Cart and Login - Mobile and Tablet */}
             <div className="flex items-center gap-6 border-t border-gray-100 pt-4">
               <Link
                 to="/cart"

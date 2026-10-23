@@ -6,7 +6,7 @@ import Products from "../pages/user/Products";
 
 import AdminLayout from "../layouts/AdminLayout";
 import AdminRoutes from "./AdminRoutes";
-
+import Contact from "../pages/user/Contact";
 function AppRoutes() {
   return (
     <Routes>
@@ -14,6 +14,8 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/shop" element={<Products />} />
+      <Route path="/contact" element={<Contact />} />
+      
 
       {/* Admin Pages */}
       <Route
