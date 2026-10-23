@@ -5,8 +5,8 @@ import CategoryFilter from "./components/user/CategoryFilter";
 
 function App() {
   return (
-    // <BrowserRouter>
-    <CategoryFilter/>
+    <BrowserRouter>
+   <CategoryFilte r/>
     //   <AppRoutes />
     //   <Footer />
     // </BrowserRouter>
