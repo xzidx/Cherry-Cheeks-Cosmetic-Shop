@@ -32,7 +32,7 @@ export default function CartItem({
         <div>
           <h3 className="font-semibold text-gray-900 text-lg">{title}</h3>
           <p className="text-sm text-gray-500 mb-1">{variant}</p>
-          <span className="font-semibold text-rose-500 text-lg">{price}</span>
+          <span className="font-semibold text-[#F66B87] text-lg">{price}</span>
         </div>
       </div>
 
