@@ -15,7 +15,7 @@ function AppRoutes() {
       {/* User Pages */}
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/shop" element={<Products />} />
+      <Route path="/products" element={<Products />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
