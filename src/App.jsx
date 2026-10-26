@@ -7,7 +7,7 @@ import CartItem from "./components/user/CartItem";
 function App() {
   return (
     <BrowserRouter>
-    <CartItem/>
+    {/* <CartItem/> */}
     <AppRoutes />
     </BrowserRouter>
   );
