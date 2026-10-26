@@ -19,27 +19,27 @@ function AdminSidebar({ isOpen = false, onClose }) {
     },
     {
       name: "Product Management",
-      path: "/admin/products",
+      path: "/admin/manage-products",
       icon: FiPackage,
     },
     {
       name: "Category Management",
-      path: "/admin/categories",
+      path: "/admin/manage-categories",
       icon: FiGrid,
     },
     {
       name: "Order Management",
-      path: "/admin/orders",
+      path: "/admin/manage-orders",
       icon: FiShoppingBag,
     },
     {
       name: "User Management",
-      path: "/admin/users",
+      path: "/admin/manage-users",
       icon: FiUsers,
     },
     {
       name: "Settings",
-      path: "/admin/settings",
+      path: "/admin/admin-settings",
       icon: FiSettings,
     },
   ];

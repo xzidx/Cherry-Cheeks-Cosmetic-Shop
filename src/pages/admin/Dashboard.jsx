@@ -1,3 +1,4 @@
+import RecentOrders from "../../components/admin/RecentOrders";
 function Dashboard() {
   return (
     <div>
@@ -40,7 +41,7 @@ function Dashboard() {
         <h2 className="text-lg font-semibold text-gray-800">
           Recent Activity
         </h2>
-
+          <RecentOrders />
         <p className="mt-3 text-sm text-gray-500">
           No recent activity to display.
         </p>
