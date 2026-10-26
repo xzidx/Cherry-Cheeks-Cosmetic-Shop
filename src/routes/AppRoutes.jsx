@@ -9,6 +9,7 @@ import AdminRoutes from "./AdminRoutes";
 import Contact from "../pages/user/Contact";
 import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
+import UserSettings from "../pages/user/Setting.jsx";
 function AppRoutes() {
   return (
     <Routes>
@@ -19,7 +20,7 @@ function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
-      
+      <Route path="/settings" element={<UserSettings />} />
 
       {/* Admin Pages */}
       <Route
