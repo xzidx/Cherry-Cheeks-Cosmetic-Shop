@@ -70,18 +70,24 @@ function RecentOrders() {
   }
 
   return (
-    <section className="w-full py-4">
-      <div className="mx-auto w-full max-w-[1350px]">
+    <section className="w-full py-2">
+      <div className="mx-auto w-full max-w-[1550px]">
 
-     
+        {/* Page Heading */}
+        <div className="mb-2">
+
+        </div>
 
         {/* Orders Card */}
-        <div className="overflow-hidden rounded-2xl bg-white">
+        <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
 
           {/* Table Header */}
           <div className="flex flex-col gap-4 border-b border-gray-100 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-             
+              <h2 className="text-lg font-bold text-gray-800 sm:text-xl">
+                Order List
+              </h2>
+
               <p className="mt-1 text-sm text-gray-500">
                 {filteredOrders.length} orders found
               </p>

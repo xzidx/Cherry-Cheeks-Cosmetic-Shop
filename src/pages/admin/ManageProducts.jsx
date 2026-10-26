@@ -1,6 +1,7 @@
-import RecentOrders from "../../components/admin/RecentOrders";
+import RecentOrders from "../../components/admin/RecentProducts";
 import SearchBar from "../../components/shared/SearchBar";
 import CategoryFilter from "../../components/user/CategoryFilter";
+import AllProducts from "../../components/admin/AllProducts";
 import { FiPackage } from "react-icons/fi";
 function Dashboard() {
   return (
@@ -30,9 +31,9 @@ function Dashboard() {
 
           {/* find and category */}
         <div>
-  <SearchBar />
-  <CategoryFilter />
-</div>
+          <SearchBar />
+          <CategoryFilter />
+        </div>
 
 
       {/* Statistics Cards */}
@@ -59,14 +60,15 @@ function Dashboard() {
       </div> */}
 
       {/* Recent Activity */}
-      <div className="mt-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-gray-800">
           Recent Activity
         </h2>
           <RecentOrders />
-        <p className="mt-3 text-sm text-gray-500">
-          No recent activity to display.
-        </p>
+        <h2 className="text-lg font-semibold text-gray-800">
+          Recent Activity
+        </h2>
+         <AllProducts />
       </div>
     </div>
   );

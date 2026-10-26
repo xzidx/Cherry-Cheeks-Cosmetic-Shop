@@ -40,6 +40,15 @@ function RecentProducts() {
       reviews: 86,
       image: "https://placehold.co/400x400/FFF5F6/F66B87?text=Blush+Palette",
     },
+    {
+      id: 5,
+      name: "Vitamin C Serum",
+      weight: "30ml",
+      price: "$28.00",
+      rating: 5,
+      reviews: 76,
+      image: "https://placehold.co/400x400/FFF5F6/F66B87?text=Vitamin+C+Serum",
+    },
   ];
 
   function handleEdit(product) {
@@ -47,18 +56,12 @@ function RecentProducts() {
   }
 
   return (
-    <section className="w-full py-4">
-      <div className="mx-auto w-full max-w-[1350px]">
+    <section className="w-full py-1">
+      <div className="mx-auto w-full max-w-[1550px]">
 
         {/* Section Heading */}
-        <div className="mb-6">
-          <h2 className="mb-3 text-sm font-medium text-gray-800 sm:text-base lg:text-lg">
-            PRODUCT MANAGEMENT
-          </h2>
-
-          <h1 className="text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
-            Recent Products
-          </h1>
+        <div className="mb-4">
+      
 
           <p className="mt-4 text-sm leading-6 text-gray-500 sm:text-base">
             Explore your latest products and manage your cosmetic collection.
@@ -70,9 +73,6 @@ function RecentProducts() {
 
           {/* Card Header */}
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Latest Products
-            </h2>
 
             <span className="rounded-full bg-[#FFF5F6] px-3 py-1 text-xs font-medium text-[#F66B87]">
               {products.length} Products
@@ -80,7 +80,7 @@ function RecentProducts() {
           </div>
 
           {/* Product Grid */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {products.map((product) => (
               <div
                 key={product.id}
