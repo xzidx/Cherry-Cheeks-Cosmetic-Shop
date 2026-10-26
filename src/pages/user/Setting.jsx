@@ -9,6 +9,7 @@ import {
   Loader2,
 } from "lucide-react";
 import Navbar from "../../components/shared/Navbar";
+import Footer from "../../components/shared/Footer";
 
 /* -------------------------------------------------------------------------- */
 /* API layer – adjust the base URL / endpoints / token source to your backend */
@@ -319,8 +320,10 @@ function UserSettings() {
   /* ---------- render ---------- */
   return (
     <>
+    
       <Navbar />
-
+      
+      
       <main className="min-h-screen bg-[#F6F8FB] px-4 py-8 sm:px-6 lg:px-[29px] lg:py-[43px]">
         <div className="mx-auto max-w-[1600px]">
           <header className="mb-8">
@@ -493,6 +496,9 @@ function UserSettings() {
           </form>
         </div>
       </main>
+
+      <Footer />
+      
     </>
   );
 }
