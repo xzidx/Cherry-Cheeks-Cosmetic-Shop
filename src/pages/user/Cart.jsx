@@ -6,21 +6,21 @@ import Navbar from '../../components/shared/Navbar';
 const PROMO_CODES = { GLOW10: 0.1, BEAUTY20: 0.2 };
 
 function OrderSummary({ items = [] }) {
-  const [promo, setPromo] = useState('');
-  const [discountRate, setDiscountRate] = useState(0);
-  const [message, setMessage] = useState('');
+    const [promo, setPromo] = useState('');
+    const [discountRate, setDiscountRate] = useState(0);
+    const [message, setMessage] = useState('');
 
-  const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
-  const discount = subtotal * discountRate;
-  const shipping = subtotal === 0 || subtotal >= 50 ? 0 : 5.99;
-  const total = subtotal - discount + shipping;
+    const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+    const discount = subtotal * discountRate;
+    const shipping = subtotal === 0 || subtotal >= 50 ? 0 : 5.99;
+    const total = subtotal - discount + shipping;
 
-  const applyPromo = (e) => {
-    e.preventDefault();
-    const rate = PROMO_CODES[promo.trim().toUpperCase()];
-    setDiscountRate(rate || 0);
-    setMessage(rate ? 'Promo code applied!' : 'Invalid code. Try GLOW10 or BEAUTY20');
-  };
+    const applyPromo = (e) => {
+        e.preventDefault();
+        const rate = PROMO_CODES[promo.trim().toUpperCase()];
+        setDiscountRate(rate || 0);
+        setMessage(rate ? 'Promo code applied!' : 'Invalid code. Try GLOW10 or BEAUTY20');
+    };
 
   return (
         <div className="bg-[#fff5f6] border border-rose-100 rounded-3xl p-6 sm:p-7">
@@ -54,29 +54,6 @@ function OrderSummary({ items = [] }) {
                 </div>
             </div>
 
-            {/* Promo Code Form */}
-            <form onSubmit={applyPromo} className="mt-6 flex gap-2">
-                <input
-                type="text"
-                placeholder="Promo code"
-                value={promo}
-                onChange={(e) => setPromo(e.target.value)}
-                className="flex-1 px-3.5 py-2 rounded-xl border border-rose-200 bg-white text-xs uppercase focus:outline-none focus:ring-2 focus:ring-rose-400"
-                />
-                <button
-                type="submit"
-                className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded-xl hover:bg-black transition-colors"
-                >
-                Apply
-                </button>
-            </form>
-
-            {message && (
-                <p className={`text-xs font-semibold mt-2 flex items-center gap-1 ${discountRate ? 'text-emerald-600' : 'text-red-500'}`}>
-                {discountRate > 0 && <CheckCircle2 className="w-3.5 h-3.5" />} {message}
-                </p>
-            )}
-
             {/* Buttons */}
             <div className="mt-6 space-y-3">
                 <button
@@ -103,7 +80,6 @@ function OrderSummary({ items = [] }) {
        
     );
 }
-
 //    3. Main Shopping Cart Page
 const INITIAL_CART = [
   {
@@ -136,7 +112,7 @@ export default function ShoppingCartPage() {
 
   return (
     <>
-        <Navbar/>
+        <Navbar/>         
 
         <div className="min-h-screen bg-rose-50/40 text-slate-800 font-sans antialiased pb-16">
         {/* Top Banner */}
@@ -157,53 +133,51 @@ export default function ShoppingCartPage() {
 
         {/* Main Container */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 -mt-8 relative z-20">
-            <div className="bg-white rounded-3xl shadow-xl border border-rose-100 p-6 md:p-10">
-            
-            {/* Header */}
-            <div className="mb-8">
-                <span className="text-xs font-bold tracking-widest text-rose-500 uppercase block mb-1">
-                Your Shopping Bag
-                </span>
-                <div className="flex items-center justify-between">
-                <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">My Cart</h1>
-                <span className="text-sm font-semibold text-[#F66B87] bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
-                    {totalCount} {totalCount === 1 ? 'Item' : 'Items'}
-                </span>
-                </div>
-            </div>
-
-            {/* Grid Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
-                {/* Left: Items List using your CartItem component */}
-                <div className="lg:col-span-7 space-y-4">
-                {items.length === 0 ? (
-                    <div className="text-center py-16 px-4 rounded-2xl border border-dashed border-rose-200 bg-rose-50/20">
-                    <ShoppingBag className="w-14 h-14 mx-auto text-rose-300 mb-3" />
-                    <h3 className="text-lg font-bold text-gray-800 mb-1">Your cart is empty</h3>
-                    <p className="text-sm text-gray-400">Add items to view them here.</p>
+            <div className="bg-white rounded-3xl shadow-xl border border-rose-100 p-6 md:p-20">
+                <div className="mb-8">
+                    <span className="text-xs font-bold tracking-widest text-rose-500 uppercase block mb-1">
+                    Your Shopping Bag
+                    </span>
+                    <div className="flex items-center justify-between">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">My Cart</h1>
+                    <span className="text-sm font-semibold text-[#F66B87] bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
+                        {totalCount} {totalCount === 1 ? 'Item' : 'Items'}
+                    </span>
                     </div>
-                ) : (
-                    items.map((item) => (
-                    <CartItem
-                        key={item.id}
-                        imageSrc={item.imageSrc}
-                        title={item.title}
-                        variant={item.variant}
-                        price={`$${(item.unitPrice * item.quantity).toFixed(2)}`}
-                        quantity={item.quantity}
-                        onQuantityChange={(delta) => handleQuantityChange(item.id, delta)}
-                        onRemove={() => handleRemoveItem(item.id)}
-                    />
-                    ))
-                )}
                 </div>
 
-                {/* Right: Order Summary */}
-                <div className="lg:col-span-5">
-                <OrderSummary items={items} />
+                 {/* item  */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">                   
+                    {/* Left: Items List using your CartItem component */}
+                    <div className="lg:col-span-7 space-y-4">
+                        {items.length === 0 ? (
+                            <div className="text-center py-16 px-4 rounded-2xl border border-dashed border-rose-200 bg-rose-50/20">
+                            <ShoppingBag className="w-14 h-14 mx-auto text-rose-300 mb-3" />
+                            <h3 className="text-lg font-bold text-gray-800 mb-1">Your cart is empty</h3>
+                            <p className="text-sm text-gray-400">Add items to view them here.</p>
+                            </div>
+                        ) : (
+                            items.map((item) => (
+                            <CartItem
+                                key={item.id}
+                                imageSrc={item.imageSrc}
+                                title={item.title}
+                                variant={item.variant}
+                                price={`$${(item.unitPrice * item.quantity).toFixed(2)}`}
+                                quantity={item.quantity}
+                                onQuantityChange={(delta) => handleQuantityChange(item.id, delta)}
+                                onRemove={() => handleRemoveItem(item.id)}
+                            />
+                            ))
+                        )}
+                    </div>
+
+                    {/* Right: Order Summary */}
+                    <div className="lg:col-span-5">
+                        <OrderSummary items={items} />
+                    </div>
+
                 </div>
-            </div>
             </div>
         </main>
         </div>
