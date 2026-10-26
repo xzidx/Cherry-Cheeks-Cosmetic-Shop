@@ -65,7 +65,7 @@ function AdminSidebar({ isOpen = false, onClose }) {
         {/* Brand */}
         <div className="flex h-19 items-center justify-between  px-5">
           <div>
-            <h2 className="text-xl font-bold text-pink-600">
+            <h2 className="text-xl font-bold text-[#F66B87]">
               Cherry Cheeks
             </h2>
             <p className="text-xs text-gray-500">Admin Panel</p>
@@ -97,12 +97,12 @@ function AdminSidebar({ isOpen = false, onClose }) {
                 to={item.path}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors duration-200 ${
-                    isActive
-                      ? "bg-pink-50 text-pink-600"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-pink-600"
-                  }`
-                }
+                    `flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors duration-200 ${
+                      isActive
+                        ? "bg-[#FFF5F6] text-[#F66B87]"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-[#F66B87]"
+                    }`
+                  }
               >
                 {({ isActive }) => (
                   <>
@@ -122,7 +122,7 @@ function AdminSidebar({ isOpen = false, onClose }) {
 
         {/* Sidebar Footer */}
         <div className="border-t border-gray-200 p-4">
-          <div className="mb-3 rounded-lg bg-pink-50 p-3">
+          <div className="mb-3 rounded-lg bg-[#FFF5F6] p-3">
             <p className="text-sm font-semibold text-gray-800">
               Cherry Cheeks
             </p>
