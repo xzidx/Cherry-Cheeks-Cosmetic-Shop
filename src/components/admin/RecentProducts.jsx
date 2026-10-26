@@ -59,11 +59,13 @@ function RecentProducts() {
     <section className="w-full py-1">
       <div className="mx-auto w-full max-w-[1550px]">
 
-        {/* Section Heading */}
+         {/* Section Heading */}
         <div className="mb-4">
-      
+          <h2 className="text-xl font-semibold text-gray-800 sm:text-2xl">
+            Recent Products
+          </h2>
 
-          <p className="mt-4 text-sm leading-6 text-gray-500 sm:text-base">
+          <p className="mt-2 text-sm leading-6 text-gray-500 sm:text-base">
             Explore your latest products and manage your cosmetic collection.
           </p>
         </div>

@@ -5,6 +5,7 @@ import ManageOrders from "../pages/admin/ManageOrders";
 import ManageCategories from "../pages/admin/ManageCategories";
 import ManageUsers from "../pages/admin/ManageUsers";
 import AdminSettings from "../pages/admin/AdminSettings";
+import AddProduct from "../pages/admin/AddProduct";
 
 function AdminRoutes() {
   return (
@@ -20,6 +21,7 @@ function AdminRoutes() {
       <Route path="/manage-orders" element={<ManageOrders />} />
       <Route path="/manage-users" element={<ManageUsers />} />
       <Route path="/admin-settings" element={<AdminSettings />} />
+      <Route path="/products/add" element={<AddProduct />} />
     </Routes>
   );
 }

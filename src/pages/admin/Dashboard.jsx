@@ -14,25 +14,23 @@ function Dashboard() {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <p className="text-sm text-gray-500">Total Products</p>
+          <p className="text-base text-gray-500">Total Products</p>
           <h2 className="mt-2 text-3xl font-bold text-gray-800">0</h2>
+          <p className="text-sm text-gray-500 mt-2">All purchases in this list</p>
         </div>
 
         <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <p className="text-sm text-gray-500">Total Categories</p>
+          <p className="text-base text-gray-500">Total Orders</p>
           <h2 className="mt-2 text-3xl font-bold text-gray-800">0</h2>
+          <p className="text-sm text-gray-500 mt-2">All purchases in this list</p>
         </div>
 
         <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <p className="text-sm text-gray-500">Total Orders</p>
+          <p className="text-base text-gray-500">Total Customers</p>
           <h2 className="mt-2 text-3xl font-bold text-gray-800">0</h2>
-        </div>
-
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <p className="text-sm text-gray-500">Total Customers</p>
-          <h2 className="mt-2 text-3xl font-bold text-gray-800">0</h2>
+          <p className="text-sm text-gray-500 mt-2">All purchases in this list</p>
         </div>
       </div>
 

@@ -23,7 +23,7 @@ function Dashboard() {
         {/* Add Product Button */}
         <button
           type="button"
-          className="inline-flex w-full shrink-0 items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:w-auto sm:py-2"
+          className="inline-flex w-full shrink-0 items-center justify-center rounded-lg bg-[#FA5B8A] px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:w-auto sm:py-2"
         >
           Add Product
         </button>
@@ -60,14 +60,10 @@ function Dashboard() {
       </div> */}
 
       {/* Recent Activity */}
-      <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-gray-800">
-          Recent Activity
-        </h2>
+      <div className=" rounded-xl p-2 ">
+        <div className="mb-6"></div>
           <RecentOrders />
-        <h2 className="text-lg font-semibold text-gray-800">
-          Recent Activity
-        </h2>
+        <div className="mb-6"></div>
          <AllProducts />
       </div>
     </div>
