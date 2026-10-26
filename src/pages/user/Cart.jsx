@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ShoppingBag, CheckCircle2, Sparkles } from 'lucide-react';
 import CartItem from '../../components/user/CartItem';
 import Navbar from '../../components/shared/Navbar';
+import Footer from '../../components/shared/Footer';
 
 const PROMO_CODES = { GLOW10: 0.1, BEAUTY20: 0.2 };
 
@@ -167,7 +168,8 @@ export default function ShoppingCartPage() {
                                 quantity={item.quantity}
                                 onQuantityChange={(delta) => handleQuantityChange(item.id, delta)}
                                 onRemove={() => handleRemoveItem(item.id)}
-                            />
+                                
+                            />                          
                             ))
                         )}
                     </div>
@@ -181,6 +183,7 @@ export default function ShoppingCartPage() {
             </div>
         </main>
         </div>
+        <Footer/>
     </>
   );
 }
