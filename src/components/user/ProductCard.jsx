@@ -1,5 +1,7 @@
 import Button from "../shared/Button";
-import { useEffect, useSt } from "react";
+import { useState } from "react";
+
+
 function ProductCard({ product, onAddToCart }) {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
@@ -36,7 +38,7 @@ function ProductCard({ product, onAddToCart }) {
 
         <Button
           className="w-full"
-          onClick={() => onAddToCart?.(product)}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </Button>
