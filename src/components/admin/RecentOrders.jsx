@@ -1,62 +1,12 @@
 
 import React, { useState } from "react";
 import { FiFilter, FiEye } from "react-icons/fi";
-
+import { useNavigate } from "react-router-dom";
+import orders from "../../data/orders";
 function RecentOrders() {
   const [statusFilter, setStatusFilter] = useState("All Statuses");
-
-  const orders = [
-    {
-      id: "#ORD-001",
-      user: "Sokha",
-      volume: "30ml",
-      category: "Hydrating Serum",
-      branch: "Phnom Penh",
-      quantity: 2,
-      payment: "Pay on Cash on Delivery",
-      status: "Completed",
-    },
-    {
-      id: "#ORD-002",
-      user: "Dara",
-      volume: "50ml",
-      category: "Cleansing Foam",
-      branch: "Siem Reap",
-      quantity: 1,
-      payment: "Pay on Cash on Delivery",
-      status: "Completed",
-    },
-    {
-      id: "#ORD-003",
-      user: "Sophea",
-      volume: "100ml",
-      category: "Sunscreen",
-      branch: "Phnom Penh",
-      quantity: 3,
-      payment: "Pay on Cash on Delivery",
-      status: "Pending",
-    },
-    {
-      id: "#ORD-004",
-      user: "Vanna",
-      volume: "30ml",
-      category: "Hydrating Serum",
-      branch: "Battambang",
-      quantity: 1,
-      payment: "Pay on Cash on Delivery",
-      status: "Completed",
-    },
-    {
-      id: "#ORD-005",
-      user: "Malis",
-      volume: "50ml",
-      category: "Cleansing Foam",
-      branch: "Phnom Penh",
-      quantity: 2,
-      payment: "Pay on Cash on Delivery",
-      status: "Pending",
-    },
-  ];
+  const navigate = useNavigate();
+  
 
   const filteredOrders =
     statusFilter === "All Statuses"
@@ -64,9 +14,7 @@ function RecentOrders() {
       : orders.filter((order) => order.status === statusFilter);
 
   function handleViewDetails(order) {
-    alert(
-      `Order: ${order.id}\nCustomer: ${order.user}\nProduct: ${order.category}\nQuantity: ${order.quantity}\nStatus: ${order.status}`
-    );
+    navigate(`/admin/orders/${encodeURIComponent(order.id)}`);
   }
 
   return (

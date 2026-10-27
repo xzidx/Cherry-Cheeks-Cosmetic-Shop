@@ -57,7 +57,7 @@ function RecentProducts() {
 
   return (
     <section className="w-full py-1">
-      <div className="mx-auto w-full max-w-[1550px]">
+      <div className="mx-auto w-full max-w-[1600px]">
 
          {/* Section Heading */}
         <div className="mb-4">
