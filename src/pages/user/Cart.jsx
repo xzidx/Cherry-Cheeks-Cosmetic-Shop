@@ -117,7 +117,7 @@ export default function ShoppingCartPage() {
     <>
         <Navbar/>         
 
-        <div className="min-h-screen bg-rose-50/40 text-slate-800 font-sans antialiased pb-16">
+        <div className="min-h-screen bg-rose-50/40 text-slate-800 font-family antialiased pb-16">
         {/* Top Banner */}
         <div className="w-full bg-[#fca5a5]/30 border-b border-rose-100">
             <div className="max-w-7xl mx-auto h-44 md:h-56 flex items-center justify-center space-x-6 px-4">
