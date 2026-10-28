@@ -1,5 +1,8 @@
 import { useState } from "react";
-import banner1 from "../../assets/banner.jpeg";
+import banner1 from "../../assets/banner.jpg";
+import gallery1 from "../../assets/care banner.avif";
+import gallery2 from "../../assets/carrrrere.jpeg";
+import gallery3 from "../../assets/new 1.jpg";
 
 import Navbar from "../../components/shared/Navbar";
 import Footer from "../../components/shared/Footer";
@@ -7,7 +10,7 @@ import Footer from "../../components/shared/Footer";
 // Same container for the banner and the product section, so their edges line up
 const CONTAINER = "mx-auto w-full max-w-7xl px-4";
 
-// TODO: ជំនួសដោយទិន្នន័យពិត (API) ពេលក្រោយ
+// TODO: replace with real data (API) later
 const PRODUCT = {
   id: 1,
   category: "Beauty & Cosmetics",
@@ -18,11 +21,7 @@ const PRODUCT = {
   shortDescription:
     "Long-lasting lipstick with a rich, creamy finish that glides on smoothly and keeps lips comfortable all day.",
   shade: "Rosy Red",
-  images: [
-    "src/assets/care banner.avif",
-    "src/assets/carrrrere.jpeg",
-    "src/assets/new 1.jpg",
-  ],
+  images: [gallery1, gallery2, gallery3],
   description:
     "This lipstick delivers bold, vibrant colour with a comfortable, creamy formula. Its smooth texture glides on evenly and stays put for hours without drying out your lips.",
   features: [
@@ -63,24 +62,26 @@ export default function ProductDetail() {
   const decrease = () => setQty((q) => Math.max(1, q - 1));
   const increase = () => setQty((q) => q + 1);
 
+  // total = unit price x quantity (recalculated every time qty changes)
+  const total = PRODUCT.price * qty;
+
   return (
-    <>
+    <>  
       <Navbar />
 
       {/* Banner */}
-      <div className={`${CONTAINER} pt-4`}>
-        <img
-          src={banner1}
-          alt="Beauty and cosmetics banner"
-          className="h-64 w-full rounded-2xl object-cover sm:h-80"
-        />
-      </div>
-
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen pt-4">
+  <img
+    src={banner1}
+    alt="Beauty and cosmetics banner"
+    className="h-60 w-full object-cover sm:h-80 md:h-60"
+  />
+</div>
       {/* Product section */}
       <main className={`${CONTAINER} py-10`}>
-        <section className="grid gap-10 md:grid-cols-2">
+        <section className="grid grid-cols-1 gap-10 md:grid-cols-2">
           {/* Gallery */}
-          <div>
+          <div className="min-w-0">
             <img
               src={PRODUCT.images[activeImage]}
               alt={PRODUCT.name}
@@ -89,7 +90,7 @@ export default function ProductDetail() {
             <div className="mt-4 grid grid-cols-3 gap-3">
               {PRODUCT.images.map((src, i) => (
                 <button
-                  key={src}
+                  key={i}
                   type="button"
                   onClick={() => setActiveImage(i)}
                   aria-label={`Show image ${i + 1}`}
@@ -106,7 +107,7 @@ export default function ProductDetail() {
           </div>
 
           {/* Info */}
-          <div>
+          <div className="min-w-0">
             <p className="text-xs font-medium uppercase tracking-wide text-pink-500">
               {PRODUCT.category}
             </p>
@@ -152,13 +153,24 @@ export default function ProductDetail() {
               </div>
             </div>
 
+            {/* Total price */}
+            <div className="mt-5 flex items-center justify-between rounded-xl bg-pink-50 px-4 py-3">
+              <div>
+                <p className="text-xs text-gray-500">Total</p>
+                <p className="text-xs text-gray-500">
+                  {qty} × ${PRODUCT.price.toFixed(2)}
+                </p>
+              </div>
+              <p className="text-2xl font-bold text-pink-600">${total.toFixed(2)}</p>
+            </div>
+
             {/* Actions */}
             <div className="mt-6 space-y-3">
               <button
                 type="button"
                 className="w-full rounded-lg bg-pink-500 py-3 text-sm font-semibold text-white transition hover:bg-pink-600"
               >
-                Add to Cart
+                Add to Cart · ${total.toFixed(2)}
               </button>
               <button
                 type="button"
