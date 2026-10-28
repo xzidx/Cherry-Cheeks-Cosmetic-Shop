@@ -1,87 +1,87 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiFilter, FiEye } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function RecentOrders() {
+  const [orders, setOrders] = useState([]);
   const [statusFilter, setStatusFilter] = useState("All Statuses");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const orders = [
-    {
-      id: "#ORD-001",
-      user: "Sokha",
-      volume: "30ml",
-      category: "Hydrating Serum",
-      branch: "Phnom Penh",
-      quantity: 2,
-      payment: "Pay on Cash on Delivery",
-      status: "Completed",
-    },
-    {
-      id: "#ORD-002",
-      user: "Dara",
-      volume: "50ml",
-      category: "Cleansing Foam",
-      branch: "Siem Reap",
-      quantity: 1,
-      payment: "Pay on Cash on Delivery",
-      status: "Completed",
-    },
-    {
-      id: "#ORD-003",
-      user: "Sophea",
-      volume: "100ml",
-      category: "Sunscreen",
-      branch: "Phnom Penh",
-      quantity: 3,
-      payment: "Pay on Cash on Delivery",
-      status: "Pending",
-    },
-    {
-      id: "#ORD-004",
-      user: "Vanna",
-      volume: "30ml",
-      category: "Hydrating Serum",
-      branch: "Battambang",
-      quantity: 1,
-      payment: "Pay on Cash on Delivery",
-      status: "Completed",
-    },
-    {
-      id: "#ORD-005",
-      user: "Malis",
-      volume: "50ml",
-      category: "Cleansing Foam",
-      branch: "Phnom Penh",
-      quantity: 2,
-      payment: "Pay on Cash on Delivery",
-      status: "Pending",
-    },
-  ];
+  const navigate = useNavigate();
 
+  // Fetch orders from the JSON file
+  useEffect(() => {
+    async function loadOrders() {
+      try {
+        const response = await fetch("/data/orders.json");
+
+        if (!response.ok) {
+          throw new Error("Failed to load orders.");
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Order data must be an array.");
+        }
+
+        setOrders(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadOrders();
+  }, []);
+
+  // Filter orders by status
   const filteredOrders =
     statusFilter === "All Statuses"
       ? orders
       : orders.filter((order) => order.status === statusFilter);
 
+  // Navigate to order details
   function handleViewDetails(order) {
-    alert(
-      `Order: ${order.id}\nCustomer: ${order.user}\nProduct: ${order.category}\nQuantity: ${order.quantity}\nStatus: ${order.status}`
+    navigate(`/admin/orders/${encodeURIComponent(order.id)}`);
+  }
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <section className="w-full py-2">
+        <p className="py-12 text-center text-gray-500">
+          Loading orders...
+        </p>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <section className="w-full py-2">
+        <p className="py-12 text-center text-red-500">
+          {error}
+        </p>
+      </section>
     );
   }
 
   return (
-    <section className="w-full py-4">
-      <div className="mx-auto w-full max-w-[1350px]">
-
-     
-
+    <section className="w-full py-2">
+      <div className="mx-auto w-full max-w-[1550px]">
         {/* Orders Card */}
-        <div className="overflow-hidden rounded-2xl bg-white">
-
+        <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
           {/* Table Header */}
           <div className="flex flex-col gap-4 border-b border-gray-100 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-             
+              <h2 className="text-lg font-bold text-gray-800 sm:text-xl">
+                Order List
+              </h2>
+
               <p className="mt-1 text-sm text-gray-500">
                 {filteredOrders.length} orders found
               </p>

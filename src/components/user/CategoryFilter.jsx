@@ -32,7 +32,7 @@ export default function CategoryFilter({
     <div
       role="group"
       aria-label="Filter products by category"
-      className="flex flex-wrap justify-center gap-2.5 py-3.5
+      className="flex flex-wrap gap-2.5 py-3.5
                  max-sm:flex-nowrap max-sm:justify-start max-sm:overflow-x-auto
                  max-sm:px-4 max-sm:pt-1.5 max-sm:pb-3"
     >
