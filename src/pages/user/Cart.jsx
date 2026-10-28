@@ -13,15 +13,8 @@ function OrderSummary({ items = [] }) {
 
     const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
     const discount = subtotal * discountRate;
-    const shipping = subtotal === 0 || subtotal >= 50 ? 0 : 5.99;
+    const shipping = subtotal === 0 || subtotal >= 50 ? 0 : 4.99;
     const total = subtotal - discount + shipping;
-
-    const applyPromo = (e) => {
-        e.preventDefault();
-        const rate = PROMO_CODES[promo.trim().toUpperCase()];
-        setDiscountRate(rate || 0);
-        setMessage(rate ? 'Promo code applied!' : 'Invalid code. Try GLOW10 or BEAUTY20');
-    };
 
   return (
         <div className="bg-[#fff5f6] border border-rose-100 rounded-3xl p-6 sm:p-7">
@@ -87,10 +80,19 @@ const INITIAL_CART = [
     id: '1',
     title: 'Lan Come Lipstick',
     variant: '4.2g • Mblue',
-    unitPrice: 30.00,
+    unitPrice: 29.99,
     quantity: 1,
     imageSrc: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=300&q=80',
   },
+  {
+    id: '2',
+    title: 'Grow Export Night Cream',
+    variant: '4.2g • Mblue',
+    unitPrice: 39.99,
+    quantity: 1,
+    imageSrc: 'src/assets/images/p2.jpg',
+  },
+  
 ];
 export default function ShoppingCartPage() {
   const [items, setItems] = useState(INITIAL_CART);
@@ -136,7 +138,7 @@ export default function ShoppingCartPage() {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 -mt-8 relative z-20">
             <div className="bg-white rounded-3xl shadow-xl border border-rose-100 p-6 md:p-20">
                 <div className="mb-8">
-                    <span className="text-xs font-bold tracking-widest text-rose-500 uppercase block mb-1">
+                    <span className="text-xs font-bold tracking-widest text-[#F66B87] uppercase block mb-1">
                     Your Shopping Bag
                     </span>
                     <div className="flex items-center justify-between">
