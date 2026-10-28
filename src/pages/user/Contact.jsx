@@ -241,7 +241,6 @@ function Contact() {
 
                                             <p className="mt-1 text-sm leading-6 text-slate-500">
                                                 No. 123, Beauty Street, Sangkat 7,
-                                                <br />
                                                 Khan Daun Penh, Phnom Penh,
                                                 <br />
                                                 Cambodia
@@ -262,8 +261,6 @@ function Contact() {
 
                                             <p className="mt-1 text-sm leading-6 text-slate-500">
                                                 +855 12 345 678
-                                                <br />
-                                                +855 23 456 789
                                             </p>
                                         </div>
                                     </div>
@@ -281,8 +278,6 @@ function Contact() {
 
                                             <p className="mt-1 break-all text-sm leading-6 text-slate-500">
                                                 support@cherrycheeks.com
-                                                <br />
-                                                sales@cherrycheeks.com
                                             </p>
                                         </div>
                                     </div>
