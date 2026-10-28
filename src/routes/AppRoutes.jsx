@@ -9,6 +9,7 @@ import AdminRoutes from "./AdminRoutes";
 import Contact from "../pages/user/Contact";
 import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
+import ProductDetail from "../pages/user/ProductDetail";
 function AppRoutes() {
   return (
     <Routes>
@@ -16,6 +17,7 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/productdetail" element={<ProductDetail />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
