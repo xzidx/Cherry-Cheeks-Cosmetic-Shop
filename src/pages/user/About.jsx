@@ -14,7 +14,7 @@ export default function SkincareLanding() {
     <>
       <Navbar />
       
-      <div className="bg-[#FFF5F6] text-gray-800 selection:bg-pink-200 scroll-smooth">
+      <div className=" text-gray-800 selection:bg-pink-200 scroll-smooth">
         
         {/* SECTION 1: ABOUT US */}
         <section className="max-w-7xl mx-auto py-16 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -52,7 +52,7 @@ export default function SkincareLanding() {
         </section>
 
         {/* SECTION 2: BRAND INTRODUCTION */}
-        <section className="py-16 md:py-12 border-y border-pink-50">
+        <section className="py-16 md:py-12 border-y  border-pink-50">
           <div className="max-w-7xl mx-auto  grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="max-w-lg rounded-3xl overflow-hidden shadow-lg bg-pink-50">
               <img 
@@ -96,7 +96,7 @@ export default function SkincareLanding() {
         </section>
 
         {/* SECTION 3: ROOTED IN TRADITION (Target for "Our Story" click) */}
-        <section id="our-story" className="max-w-7xl mx-auto py-16 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <section id="our-story" className="max-w-7xl  mx-auto py-16 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
               <span className="text-sm font-normal tracking-wide uppercase block text-gray-800">Our Story</span>
