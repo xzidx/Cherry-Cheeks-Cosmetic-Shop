@@ -21,7 +21,7 @@ export default function CheckoutPage() {
     <>
       <Navbar />
       
-    <div className="min-h-screen text-slate-800 font-sans pt-16 pb-20">
+    <div className="min-h-screen text-slate-800 pt-16 pb-20">
         
         {/* HEADER SECTION */}
         <div className="max-w-7xl mx-auto  mb-10">
@@ -29,7 +29,7 @@ export default function CheckoutPage() {
                 <span className="text-xs font-bold tracking-widest text-pink-500 uppercase">Checkout</span>
                 <div className="w-8 h-[1px] bg-pink-300"></div>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-800 font-serif mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
                 Complete Your Purchase
             </h1>
             <p className="text-slate-500 text-sm">
@@ -166,15 +166,15 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* City / Province / Postal Code */}
+              {/* county / Province / Postal Code */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-600">City *</label>
+                  <label className="text-xs font-semibold text-slate-600">County *</label>
                   <div className="relative">
                     <select className="w-full pl-4 pr-8 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm appearance-none focus:outline-none focus:border-pink-400 transition text-slate-600">
-                      <option value="">Select city</option>
-                      <option value="phnom-penh">Phnom Penh</option>
-                      <option value="siem-reap">Siem Reap</option>
+                      <option value="">Select county </option>
+                      <option value="phnom-penh">Cambodia</option>
+                      <option value="siem-reap">Korean</option>
                     </select>
                     <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                   </div>
