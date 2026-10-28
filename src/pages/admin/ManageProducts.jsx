@@ -2,8 +2,11 @@ import RecentOrders from "../../components/admin/RecentProducts";
 import SearchBar from "../../components/shared/SearchBar";
 import CategoryFilter from "../../components/user/CategoryFilter";
 import AllProducts from "../../components/admin/AllProducts";
+import { useNavigate } from "react-router-dom";
+
 import { FiPackage } from "react-icons/fi";
 function Dashboard() {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Page Heading */}
@@ -23,6 +26,7 @@ function Dashboard() {
         {/* Add Product Button */}
         <button
           type="button"
+          onClick={() => navigate("/admin/products/add")}
           className="inline-flex w-full shrink-0 items-center justify-center rounded-lg bg-[#FA5B8A] px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:w-auto sm:py-2"
         >
           Add Product

@@ -26,7 +26,7 @@ function UserTable() {
   useEffect(() => {
     async function loadUsers() {
       try {
-        const response = await fetch("/student-data/users.json");
+        const response = await fetch("/data/users.json");
 
         if (!response.ok) {
           throw new Error("Failed to load users. Please try again.");

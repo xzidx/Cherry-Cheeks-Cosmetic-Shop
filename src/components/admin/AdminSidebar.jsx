@@ -23,11 +23,6 @@ function AdminSidebar({ isOpen = false, onClose }) {
       icon: FiPackage,
     },
     {
-      name: "Category Management",
-      path: "/admin/manage-categories",
-      icon: FiGrid,
-    },
-    {
       name: "Order Management",
       path: "/admin/manage-orders",
       icon: FiShoppingBag,

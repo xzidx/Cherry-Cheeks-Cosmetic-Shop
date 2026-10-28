@@ -1,34 +1,80 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiFilter, FiEye } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import orders from "../../data/orders";
-function RecentOrders() {
-  const [statusFilter, setStatusFilter] = useState("All Statuses");
-  const navigate = useNavigate();
-  
 
+function RecentOrders() {
+  const [orders, setOrders] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("All Statuses");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  // Fetch orders from the JSON file
+  useEffect(() => {
+    async function loadOrders() {
+      try {
+        const response = await fetch("/data/orders.json");
+
+        if (!response.ok) {
+          throw new Error("Failed to load orders.");
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Order data must be an array.");
+        }
+
+        setOrders(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadOrders();
+  }, []);
+
+  // Filter orders by status
   const filteredOrders =
     statusFilter === "All Statuses"
       ? orders
       : orders.filter((order) => order.status === statusFilter);
 
+  // Navigate to order details
   function handleViewDetails(order) {
     navigate(`/admin/orders/${encodeURIComponent(order.id)}`);
+  }
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <section className="w-full py-2">
+        <p className="py-12 text-center text-gray-500">
+          Loading orders...
+        </p>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <section className="w-full py-2">
+        <p className="py-12 text-center text-red-500">
+          {error}
+        </p>
+      </section>
+    );
   }
 
   return (
     <section className="w-full py-2">
       <div className="mx-auto w-full max-w-[1550px]">
-
-        {/* Page Heading */}
-        <div className="mb-2">
-
-        </div>
-
         {/* Orders Card */}
         <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
-
           {/* Table Header */}
           <div className="flex flex-col gap-4 border-b border-gray-100 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
             <div>

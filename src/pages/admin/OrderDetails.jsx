@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import orders from "../../data/orders";
 import {
   FiDownload,
   FiTruck,
@@ -62,12 +61,71 @@ function InfoItem({ icon: Icon, label, value }) {
   );
 }
 
+
 function OrderDetails() {
   const { orderId } = useParams();
 
-  const order = orders.find(
-    (item) => String(item.id) === decodeURIComponent(orderId || "")
-  );
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadOrders() {
+      try {
+        const response = await fetch("/data/orders.json");
+
+        if (!response.ok) {
+          throw new Error("Failed to load orders.");
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Order data must be an array.");
+        }
+
+        setOrders(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadOrders();
+  }, []);
+
+  const rawOrder = orders.find(
+  (item) => String(item.id) === decodeURIComponent(orderId || "")
+);
+
+const order = rawOrder
+  ? {
+      ...rawOrder,
+      customer: rawOrder.customer ?? rawOrder.user,
+      product: rawOrder.product ?? rawOrder.category,
+      size: rawOrder.size ?? rawOrder.volume,
+      location: rawOrder.location ?? rawOrder.branch,
+      paymentStatus: rawOrder.paymentStatus ?? rawOrder.payment,
+      fulfillmentStatus:
+        rawOrder.fulfillmentStatus ?? rawOrder.status,
+      shade: rawOrder.shade ?? "Not provided",
+      unitPrice: Number(rawOrder.unitPrice ?? 0),
+      amount: Number(
+        rawOrder.amount ??
+          Number(rawOrder.unitPrice ?? 0) *
+            Number(rawOrder.quantity ?? 0)
+      ),
+    }
+  : null;
+
+  if (isLoading) {
+  return <p className="p-8 text-center">Loading order details...</p>;
+  }
+
+  if (error) {
+    return <p className="p-8 text-center text-red-500">{error}</p>;
+  }
 
   if (!order) {
     return (
@@ -79,9 +137,9 @@ function OrderDetails() {
     );
   }
 
-  // Keep handleExport, handleMarkShipped, and your existing JSX here.
+  // Keep your existing handleExport, handleMarkShipped,
+  // and the rest of your JSX below.
 
-  // Keep handleExport, handleMarkShipped, and your existing JSX here.
 
 
   function handleExport() {

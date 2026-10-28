@@ -14,7 +14,7 @@ function AllProducts() {
   useEffect(() => {
     async function loadProducts() {
       try {
-        const response = await fetch("/student-data/products.json");
+        const response = await fetch("/data/products.json");
 
         if (!response.ok) {
           throw new Error("Failed to load products. Please try again.");
