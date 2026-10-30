@@ -4,6 +4,7 @@ import Navbar from "../../components/shared/Navbar";
 import ProductGrid from "../../components/user/ProductGrid";
 import CategoryCard from "../../components/user/CategoryCard";
 import skincareImage from "../../assets/home-product.png";
+import Footer from "../../components/shared/Footer";
 
 /* Reusable section heading: same style everywhere */
 function SectionHeading({ label, title, description }) {
@@ -94,7 +95,7 @@ function Home() {
               label="FEATURED PRODUCTS"
               title="Our Best Sellers"
             />
-            <ProductGrid />
+            <ProductGrid limit={5} />
           </section>
 
           {/* Hero 2: image on the left on desktop */}
@@ -118,16 +119,16 @@ function Home() {
 
             <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
               <CategoryCard
-                category={{ name: "Skincare", image: "https://placehold.co/400x400?text=Skincare" }}
+                category={{ name: "Skincare", image: "/images/products/skincare.jpg" }}
               />
               <CategoryCard
-                category={{ name: "Makeup", image: "https://placehold.co/400x400?text=Makeup" }}
+                category={{ name: "Makeup", image: "/images/products/makeup.jpg" }}
               />
               <CategoryCard
-                category={{ name: "Body Care", image: "https://placehold.co/400x400?text=Body+Care" }}
+                category={{ name: "Body Care", image: "/images/products/bodycare.jpg" }}
               />
               <CategoryCard
-                category={{ name: "Hair Care", image: "https://placehold.co/400x400?text=Hair+Care" }}
+                category={{ name: "Hair Care", image: "/images/products/haircare.jpg" }}
               />
             </div>
           </section>
@@ -175,6 +176,7 @@ function Home() {
 
         </div>
       </main>
+       <Footer />
     </>
   );
 }

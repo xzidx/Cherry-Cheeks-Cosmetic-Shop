@@ -27,7 +27,7 @@ function Dashboard() {
         <button
           type="button"
           onClick={() => navigate("/admin/products/add")}
-          className="inline-flex w-full shrink-0 items-center justify-center rounded-lg bg-[#FA5B8A] px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:w-auto sm:py-2"
+          className="inline-flex w-full shrink-0 items-center justify-center rounded-lg bg-[#FA5B8A] px-4 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 sm:w-auto sm:py-2"
         >
           Add Product
         </button>
