@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
     UserRound,
@@ -43,22 +44,18 @@ function Contact() {
         });
     };
 
-    // Same container width and horizontal padding as Navbar.jsx
-    const containerClass =
-        "mx-auto w-full max-w-auto px-4 sm:px-6 lg:px-8";
-
     return (
         <>
             <Navbar />
 
             <main className="mx-auto mb-6 max-w-full overflow-hidden rounded-3xl bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100">
                 <div className="mx-auto mb-6 max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100">
+
                     {/* Hero Section */}
                     <section className="-mr-[50px]">
                         <div className="py-14">
                             <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
 
-                                {/* Left: Heading */}
                                 <div>
                                     <p className="mb-3 text-sm uppercase tracking-[0.1em] text-black">
                                         Get in touch
@@ -75,7 +72,6 @@ function Contact() {
                                     </p>
                                 </div>
 
-                                {/* Right: Image */}
                                 <div>
                                     <img
                                         src={contactImage}
@@ -83,6 +79,7 @@ function Contact() {
                                         className="h-64 w-full rounded-2xl object-cover md:h-80"
                                     />
                                 </div>
+
                             </div>
                         </div>
                     </section>
@@ -92,7 +89,7 @@ function Contact() {
                         <div className="pb-14 md:pb-20">
                             <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-10">
 
-                                {/* Left: Contact Form */}
+                                {/* Contact Form */}
                                 <div className="min-w-0 rounded-3xl border border-pink-100 bg-white/80 p-5 shadow-sm sm:p-6 md:p-8">
 
                                     <div className="mb-8">
@@ -169,21 +166,11 @@ function Contact() {
                                                 <option value="" disabled>
                                                     Subject *
                                                 </option>
-                                                <option value="product">
-                                                    Product Inquiry
-                                                </option>
-                                                <option value="order">
-                                                    Order Support
-                                                </option>
-                                                <option value="delivery">
-                                                    Shipping & Delivery
-                                                </option>
-                                                <option value="return">
-                                                    Returns & Refunds
-                                                </option>
-                                                <option value="other">
-                                                    Other
-                                                </option>
+                                                <option value="product">Product Inquiry</option>
+                                                <option value="order">Order Support</option>
+                                                <option value="delivery">Shipping & Delivery</option>
+                                                <option value="return">Returns & Refunds</option>
+                                                <option value="other">Other</option>
                                             </select>
                                         </div>
 
@@ -205,21 +192,21 @@ function Contact() {
                                             />
                                         </div>
 
-                                        {/* Submit Button */}
+                                        {/* Send Message Button */}
                                         <button
                                             type="submit"
-                                            className="flex w-full items-center justify-center gap-3 rounded-full bg-pink-500 px-6 py-4 font-semibold text-white transition hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2"
+                                            className="flex w-full items-center justify-center gap-3 rounded-lg bg-[#F66B87] px-6 py-3 text-white transition hover:bg-[#e05571]"
                                         >
                                             <Send size={19} />
                                             Send Message
                                         </button>
+
                                     </form>
                                 </div>
 
-                                {/* Right: Contact Information */}
+                                {/* Contact Information */}
                                 <div className="min-w-0 space-y-7 lg:pt-2">
 
-                                    {/* Heading */}
                                     <div>
                                         <h2 className="font-script text-3xl text-pink-500 md:text-4xl">
                                             Get in Touch ♡
@@ -303,6 +290,7 @@ function Contact() {
 
                                     {/* Google Maps */}
                                     <div className="flex flex-col items-start gap-4 rounded-2xl border border-pink-100 bg-white/70 p-4 sm:flex-row sm:items-center sm:p-5">
+
                                         <MapPin
                                             size={34}
                                             className="shrink-0 text-pink-500"
@@ -320,23 +308,30 @@ function Contact() {
                                             </p>
                                         </div>
 
-                                        <a
-                                            href="https://www.google.com/maps/search/?api=1&query=Daun+Penh+Phnom+Penh+Cambodia"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="flex shrink-0 items-center justify-center gap-2 rounded-full bg-pink-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-pink-600"
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                window.open(
+                                                    "https://www.google.com/maps/search/?api=1&query=Daun+Penh+Phnom+Penh+Cambodia",
+                                                    "_blank"
+                                                )
+                                            }
+                                            className="flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#F66B87] px-6 py-3 text-white transition hover:bg-[#e05571]"
                                         >
                                             Open Map
                                             <ArrowRight size={16} />
-                                        </a>
+                                        </button>
+
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                     </section>
+
                 </div>
             </main>
+
             <Footer />
         </>
     );
