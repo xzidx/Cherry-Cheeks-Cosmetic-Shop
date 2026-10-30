@@ -1,7 +1,7 @@
 import React from 'react';
 import { Leaf, Heart, ShieldCheck, Users, Sparkles, Award } from 'lucide-react';
 import Navbar from '../../components/shared/Navbar';
-import Footer from '../../components/shared/Footer';
+import Footer from "../../components/shared/Footer";
 
 export default function SkincareLanding() {
   const scrollToOurStory = () => {
@@ -24,7 +24,7 @@ export default function SkincareLanding() {
               <span className="text-sm font-normal tracking-wide uppercase block text-gray-800">About Us</span>
               {/* <div className="w-8 h-[1px] bg-gray-800"></div> */}
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-[#F66B87] leading-tight">
+            <h1 className=" -ml-1 text-4xl md:text-5xl font-bold text-[#F66B87] leading-tight">
               More Than Just Skincare
             </h1>
             <p className="text-gray-600 leading-relaxed text-sm md:text-base">
@@ -33,10 +33,10 @@ export default function SkincareLanding() {
             <div>
               <button 
                 onClick={scrollToOurStory}
-                className="bg-[#F66B87] hover:bg-[#e05571] text-white font-medium px-8 py-3 rounded-full shadow-lg shadow-rose-200 transition-all duration-300 flex items-center space-x-2 text-sm cursor-pointer hover:scale-105"
+                className="bg-[#F66B87] hover:bg-[#e05571] text-white font-medium px-8 py-3 rounded-xl shadow-lg shadow-rose-200 transition-all duration-300 flex items-center space-x-2 text-sm cursor-pointer hover:scale-105"
               >
                 <span>Our Story</span>
-                <span>→</span>
+           
               </button>
             </div>
           </div>
@@ -186,7 +186,7 @@ export default function SkincareLanding() {
         </section>
 
       </div>
-      <Footer/>
+       <Footer />
     </>
   );
   

@@ -58,7 +58,7 @@ function Navbar() {
         {/* Cart and Account - Laptop and Desktop */}
         <div className="hidden items-center gap-5 lg:flex">
           <Link
-            to="/cart"
+            to="/payment"
             aria-label="Shopping cart"
             className="text-xl text-gray-700 transition-colors hover:text-pink-600"
           >

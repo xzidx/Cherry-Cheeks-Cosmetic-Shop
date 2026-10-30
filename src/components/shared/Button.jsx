@@ -10,10 +10,10 @@ function Button({
     "inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
   const variants = {
-    primary: "bg-pink-500 text-white hover:bg-pink-600",
+    primary: "bg-[#F66B87] text-white hover:bg-pink-600",
     secondary: "bg-gray-100 text-gray-800 hover:bg-gray-200",
     outline:
-      "border border-pink-500 bg-transparent text-pink-500 hover:bg-pink-50",
+      "border border-pink-500 bg-transparent text-[#F66B87]",
   };
 
   return (

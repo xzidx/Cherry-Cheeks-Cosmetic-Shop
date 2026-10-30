@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/user/Home";
 import About from "../pages/user/About";
 import Products from "../pages/user/Products";
-
+import Payment from "../pages/user/Payment";
 
 import AdminLayout from "../layouts/AdminLayout";
 import AdminRoutes from "./AdminRoutes";
@@ -12,6 +12,7 @@ import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
 import UserSettings from "../pages/user/Setting.jsx";
 import Cart from "../pages/user/Cart"
+import ProductDetail from "../pages/user/ProductDetail";
 function AppRoutes() {
   return (
     <Routes>
@@ -19,11 +20,13 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
       <Route path="/settings" element={<UserSettings />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/payment" element={<Payment />} />
 
       {/* Admin Pages */}
       <Route
