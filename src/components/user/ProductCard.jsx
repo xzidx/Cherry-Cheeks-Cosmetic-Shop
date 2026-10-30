@@ -53,12 +53,12 @@ function ProductCard({ product, onAddToCart }) {
 
         <h3
           onClick={handleViewProduct}
-          className="mb-3 cursor-pointer text-base font-semibold text-gray-800 hover:text-pink-600"
+          className="mb-3 cursor-pointer text-base font-semibold text-gray-800 hover:text-[#F66B87]"
         >
           {product.name}
         </h3>
 
-        <p className="mt-auto mb-4 text-lg font-bold text-pink-600">
+        <p className="mt-auto mb-4 text-lg font-bold text-[#F66B87]">
           ${Number(product.price).toFixed(2)}
         </p>
 
