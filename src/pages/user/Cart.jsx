@@ -6,14 +6,36 @@ import { Link } from "react-router-dom";
 import CartItem from "../../components/user/CartItem";
 import Navbar from "../../components/shared/Navbar";
 import Footer from "../../components/shared/Footer";
+import { useNavigate } from "react-router-dom";
 
 const PROMO_CODES = {
   GLOW10: 0.1,
   BEAUTY20: 0.2,
 };
 
-// Order Summary Component
-function OrderSummary({ items = [] }) {
+/* Reusable heading style */
+function SectionHeading({ label, title, description }) {
+  return (
+    <>
+      <h2 className="mb-4 text-sm font-medium text-gray-800 sm:text-base lg:text-lg">
+        {label}
+      </h2>
+
+      <h2 className="mb-6 text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
+        {title}
+      </h2>
+
+      {description && (
+        <p className="mb-6 text-sm leading-6 text-gray-500 sm:text-base">
+          {description}
+        </p>
+      )}
+    </>
+  );
+}
+
+/* Order Summary */
+function OrderSummary({ items = [], onCheckout }) {
   const [promo, setPromo] = useState("");
   const [discountRate, setDiscountRate] = useState(0);
   const [message, setMessage] = useState("");
@@ -38,7 +60,9 @@ function OrderSummary({ items = [] }) {
 
     if (PROMO_CODES[code]) {
       setDiscountRate(PROMO_CODES[code]);
-      setMessage(`Promo code applied! You saved ${PROMO_CODES[code] * 100}%.`);
+      setMessage(
+        `Promo code applied! You saved ${PROMO_CODES[code] * 100}%.`
+      );
     } else {
       setDiscountRate(0);
       setMessage("Invalid promo code. Please try again.");
@@ -46,13 +70,15 @@ function OrderSummary({ items = [] }) {
   };
 
   return (
-    <div className="rounded-2xl border border-rose-100 bg-[#FFF5F6] p-5 sm:p-6">
-      <h2 className="mb-5 border-b border-rose-100 pb-4 text-xl font-bold text-gray-900 sm:text-2xl">
+    <div className="rounded-2xl bg-[#FFF5F6] p-5 sm:p-6">
+
+      <h2 className="mb-5 border-b border-pink-100 pb-4 text-xl font-bold text-gray-900 sm:text-2xl">
         Order Summary
       </h2>
 
-      {/* Price Details */}
-      <div className="space-y-4 text-sm text-gray-600 sm:text-base">
+      {/* PRICE DETAILS */}
+      <div className="space-y-4 text-sm text-gray-500 sm:text-base">
+
         <div className="flex justify-between gap-4">
           <span>Subtotal</span>
           <span className="font-semibold text-gray-900">
@@ -80,16 +106,20 @@ function OrderSummary({ items = [] }) {
           </p>
         )}
 
-        <div className="flex items-baseline justify-between gap-4 border-t border-rose-200 pt-4">
-          <span className="text-base font-bold text-gray-900">Total</span>
+        <div className="flex items-baseline justify-between gap-4 border-t border-pink-200 pt-4">
+          <span className="text-base font-bold text-gray-900">
+            Total
+          </span>
+
           <span className="text-2xl font-bold text-[#F66B87]">
             ${total.toFixed(2)}
           </span>
         </div>
       </div>
 
-      {/* Promo Code */}
+      {/* PROMO CODE */}
       <div className="mt-6">
+
         <label
           htmlFor="promo"
           className="mb-2 block text-sm font-semibold text-gray-800"
@@ -98,6 +128,7 @@ function OrderSummary({ items = [] }) {
         </label>
 
         <div className="flex gap-2">
+
           <div className="relative min-w-0 flex-1">
             <Tag className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
 
@@ -121,6 +152,7 @@ function OrderSummary({ items = [] }) {
           >
             Apply
           </button>
+
         </div>
 
         {message && (
@@ -136,36 +168,40 @@ function OrderSummary({ items = [] }) {
         <p className="mt-2 text-xs text-gray-400">
           Try GLOW10 or BEAUTY20.
         </p>
+
       </div>
 
-      {/* Action Buttons */}
+      {/* ACTION BUTTONS */}
       <div className="mt-6 space-y-3">
+
         <button
           type="button"
           disabled={items.length === 0}
-          onClick={() => console.log("Checkout", items)}
-          className="w-full rounded-lg bg-[#F66B87] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e05571] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={onCheckout}
+          className="w-full rounded-lg bg-[#F66B87] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#e05571] disabled:cursor-not-allowed disabled:opacity-50"
         >
           Proceed to Checkout
         </button>
 
         <Link
           to="/products"
-          className="block w-full rounded-lg border border-rose-200 bg-white px-6 py-3.5 text-center text-sm font-semibold text-[#F66B87] transition hover:border-[#F66B87] hover:bg-rose-50"
+          className="block w-full rounded-lg border border-pink-200 bg-white px-6 py-3.5 text-center text-sm font-semibold text-[#F66B87] transition hover:border-[#F66B87] hover:bg-rose-50"
         >
           Continue Shopping
         </Link>
+
       </div>
 
       <div className="mt-5 flex items-center justify-center gap-2 text-xs text-gray-500">
         <Sparkles className="h-4 w-4 text-[#F66B87]" />
         <span>Free returns within 30 days</span>
       </div>
+
     </div>
   );
 }
 
-// Initial Cart Items
+/* Initial Cart Items */
 const INITIAL_CART = [
   {
     id: "1",
@@ -187,6 +223,7 @@ const INITIAL_CART = [
 ];
 
 export default function ShoppingCartPage() {
+  const navigate = useNavigate();
   const [items, setItems] = useState(INITIAL_CART);
 
   const handleQuantityChange = (id, delta) => {
@@ -195,7 +232,9 @@ export default function ShoppingCartPage() {
         if (item.id === id) {
           const newQty = item.quantity + delta;
 
-          return newQty > 0 ? { ...item, quantity: newQty } : item;
+          return newQty > 0
+            ? { ...item, quantity: newQty }
+            : item;
         }
 
         return item;
@@ -204,7 +243,9 @@ export default function ShoppingCartPage() {
   };
 
   const handleRemoveItem = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setItems((prevItems) =>
+      prevItems.filter((item) => item.id !== id)
+    );
   };
 
   const totalCount = items.reduce(
@@ -216,39 +257,40 @@ export default function ShoppingCartPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-white py-8 sm:py-10">
+      <main className="min-h-screen bg-white py-8">
+
         <div className="mx-auto w-full max-w-[1350px] px-4 sm:px-6 lg:px-8">
-          {/* Page Heading */}
-          <section className="mb-8">
-            <p className="mb-3 text-sm font-medium text-gray-800 sm:text-base">
-              YOUR SHOPPING BAG
-            </p>
 
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h1 className="text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
-                My Cart
-              </h1>
+          {/* PAGE HEADING */}
+          <section className="mb-10">
 
-              <span className="rounded-lg bg-[#FFF5F6] px-4 py-2 text-sm font-semibold text-[#F66B87]">
-                {totalCount} {totalCount === 1 ? "Item" : "Items"}
-              </span>
-            </div>
+            <SectionHeading
+              label="YOUR SHOPPING BAG"
+              title="My Cart"
+              description="Review your favorite products before placing your order."
+            />
 
-            <p className="mt-3 text-sm leading-6 text-gray-500 sm:text-base">
-              Review your favorite products before placing your order.
-            </p>
+            <span className="inline-block rounded-lg bg-[#FFF5F6] px-4 py-2 text-sm font-semibold text-[#F66B87]">
+              {totalCount} {totalCount === 1 ? "Item" : "Items"}
+            </span>
+
           </section>
 
-          {/* Cart Content */}
+          {/* CART CONTENT */}
           <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
-            {/* Cart Items */}
+
+            {/* CART ITEMS */}
             <section className="min-w-0 lg:col-span-7">
+
               <h2 className="mb-5 text-lg font-bold text-gray-900 sm:text-xl">
                 Cart Items
               </h2>
 
               {items.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-rose-200 bg-[#FFF5F6]/60 px-5 py-16 text-center">
+
+                /* EMPTY CART */
+                <div className="rounded-2xl bg-[#FFF5F6] px-5 py-16 text-center">
+
                   <ShoppingBag className="mx-auto mb-4 h-12 w-12 text-[#F66B87]" />
 
                   <h3 className="mb-2 text-xl font-bold text-gray-900">
@@ -265,9 +307,14 @@ export default function ShoppingCartPage() {
                   >
                     Explore Products
                   </Link>
+
                 </div>
+
               ) : (
+
+                /* CART ITEM LIST */
                 <div className="space-y-4">
+
                   {items.map((item) => (
                     <CartItem
                       key={item.id}
@@ -284,15 +331,23 @@ export default function ShoppingCartPage() {
                       onRemove={() => handleRemoveItem(item.id)}
                     />
                   ))}
+
                 </div>
+
               )}
+
             </section>
 
-            {/* Order Summary */}
+            {/* ORDER SUMMARY */}
             <aside className="min-w-0 lg:col-span-5">
-              <OrderSummary items={items} />
+              <OrderSummary
+                items={items}
+                onCheckout={() => navigate("/payment")}
+              />
             </aside>
+
           </div>
+
         </div>
       </main>
 

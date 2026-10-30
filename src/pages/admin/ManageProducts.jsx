@@ -3,10 +3,13 @@ import SearchBar from "../../components/shared/SearchBar";
 import CategoryFilter from "../../components/user/CategoryFilter";
 import AllProducts from "../../components/admin/AllProducts";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { FiPackage } from "react-icons/fi";
 function Dashboard() {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  
   return (
     <div>
       {/* Page Heading */}
@@ -35,7 +38,12 @@ function Dashboard() {
 
           {/* find and category */}
         <div>
-          <SearchBar />
+         <SearchBar
+            value={searchTerm}
+            onChange={setSearchTerm}
+            placeholder="Search products..."
+          />
+          <div className="mt-2"></div>
           <CategoryFilter />
         </div>
 
@@ -68,7 +76,7 @@ function Dashboard() {
         <div className="mb-6"></div>
           <RecentOrders />
         <div className="mb-6"></div>
-         <AllProducts />
+         <AllProducts searchTerm={searchTerm} />
       </div>
     </div>
   );

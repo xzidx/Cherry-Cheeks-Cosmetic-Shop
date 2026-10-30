@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { FiStar } from "react-icons/fi";
 
-function AllProducts() {
+function AllProducts({ searchTerm = "" }) {
+
+
   // Store the products fetched from the JSON file
   const [products, setProducts] = useState([]);
 
@@ -37,6 +39,9 @@ function AllProducts() {
     loadProducts();
   }, []);
 
+const filteredProducts = products.filter((product) =>
+  product.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
   // Handle Edit Product
   function handleEdit(product) {
     alert(`Edit product: ${product.name}`);
@@ -61,7 +66,7 @@ function AllProducts() {
           {/* Card Header */}
           <div className="mb-6 flex items-center justify-between">
             <span className="rounded-full bg-[#FFF5F6] px-3 py-1 text-xs font-medium text-[#F66B87]">
-              {products.length} Products
+             {filteredProducts.length} Products
             </span>
           </div>
 
@@ -79,13 +84,13 @@ function AllProducts() {
                 contains valid JSON.
               </p>
             </div>
-          ) : products.length === 0 ? (
+          ) : filteredProducts.length === 0 ? (
             <div className="py-12 text-center text-sm text-gray-500">
               No products available.
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <div
                   key={product.id}
                   className="group min-w-0 overflow-hidden rounded-xl border border-gray-100 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-lg"
