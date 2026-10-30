@@ -1,184 +1,192 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Or your router's link component
-import Navbar from "../../components/shared/Navbar";
-import ProductGrid from "../../components/user/ProductGrid";
-import CategoryCard from "../../components/user/CategoryCard";
-import skincareImage from "../../assets/home-product.png";
-import Footer from "../../components/shared/Footer";
+import React from 'react';
+import { Leaf, Heart, ShieldCheck, Users, Sparkles } from 'lucide-react';
+import Navbar from '../../components/shared/Navbar';
+import Footer from '../../components/shared/Footer';
 
-/* Reusable section heading: same style everywhere */
-function SectionHeading({ label, title, description }) {
-  return (
-    <>
-      <h2 className="mb-4 text-sm font-medium text-gray-800 sm:text-base lg:text-lg">
-        {label}
-      </h2>
+export default function SkincareLanding() {
+  const scrollToOurStory = () => {
+    const storySection = document.getElementById('our-story');
+    if (storySection) {
+      storySection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-      <p className="mb-6 text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
-        {title}
-      </p>
-
-      {description && (
-        <p className="mb-6 text-sm leading-6 text-gray-500 sm:text-base">
-          {description}
-        </p>
-      )}
-    </>
-  );
-}
-
-/* Reusable hero: set reverse to put the image on the left on desktop */
-function Hero({ label, title, description, image, imageAlt, reverse = false, className = "" }) {
-  return (
-    <div
-      className={`flex flex-col items-center justify-between gap-8 py-6 md:py-10 ${
-        reverse ? "md:flex-row-reverse" : "md:flex-row"
-      } ${className}`}
-    >
-      {/* Text Section */}
-      <div className="mb-6 mt-6 w-full md:mb-12 md:mt-12 md:w-1/2">
-        <h2 className="mb-4 text-sm font-medium text-gray-800 sm:text-base md:mt-12 lg:text-lg">
-          {label}
-        </h2>
-
-        <p className="mb-6 text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
-          {title}
-        </p>
-
-        <p className="mb-6 text-sm leading-6 text-gray-500 sm:text-base">
-          {description}
-        </p>
-
-        <button className="rounded-lg bg-[#F66B87] px-6 py-3 text-white transition hover:bg-[#e05571]">
-          Shop Now
-        </button>
-      </div>
-
-      {/* Image Section */}
-      <div className="flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg sm:h-[280px] md:h-[250px] md:w-1/2 lg:h-[320px]">
-        <img
-          src={image}
-          alt={imageAlt}
-          className="h-full w-full object-cover object-center"
-        />
-      </div>
-    </div>
-  );
-}
-
-function Home() {
   return (
     <>
       <Navbar />
 
-      <main className="py-8">
-        {/* Main Container: same padding as the Navbar */}
+      <div className="text-gray-800 selection:bg-pink-200 scroll-smooth">
+        {/* Main Container: same padding as Navbar & Home */}
         <div className="mx-auto w-full max-w-[1350px] px-4 sm:px-6 lg:px-8">
 
-          {/* Hero 1: image on the right */}
-          <Hero
-            label="NATURAL SKINCARE"
-            title={
-              <>
-                Pure Care <br />
-                for Your Natural Glow
-              </>
-            }
-            description="SinkCare brings you the goodness of nature with traditional Cambodian ingredients. Gentle, safe, and effective skincare for healthy, radiant skin."
-            image={skincareImage}
-            imageAlt="Natural skincare products"
-          />
+          {/* SECTION 1: ABOUT US */}
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-10 md:py-12">
+            <div className="space-y-6">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium uppercase text-gray-800 sm:text-base lg:text-lg">About Us</span>
+              </div>
+              <h1 className="-ml-1 text-2xl font-bold leading-tight text-[#F66B87] sm:text-3xl lg:text-4xl">
+                More Than Just Skincare
+              </h1>
+              <p className="text-sm leading-6 text-gray-500 sm:text-base">
+                SinkCare is a Cambodian skincare brand that combines traditional knowledge with natural ingredients. We create safe, effective, and gentle products for your natural beauty.
+              </p>
+              <div>
+                <button
+                  onClick={scrollToOurStory}
+                  className="bg-[#F66B87] hover:bg-[#e05571] text-white px-8 py-3 rounded-xl shadow-lg shadow-rose-200 transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105"
+                >
+                  <span>Our Story</span>
+                </button>
+              </div>
+            </div>
 
-          {/* Featured Products */}
-          <section className="mt-12 w-full">
-            <SectionHeading
-              label="FEATURED PRODUCTS"
-              title="Our Best Sellers"
-            />
-            <ProductGrid limit={5} />
-          </section>
-
-          {/* Hero 2: image on the left on desktop */}
-          <Hero
-            className="mt-12"
-            reverse
-            label="NATURAL SKINCARE"
-            title="Get 30% Off Your First Order"
-            description="SinkCare brings you the goodness of nature with traditional Cambodian ingredients. Gentle, safe, and effective skincare for healthy, radiant skin."
-            image={skincareImage}
-            imageAlt="Natural skincare products"
-          />
-
-          {/* Shop by Category */}
-          <section className="mt-12 w-full">
-            <SectionHeading
-              label="SHOP BY CATEGORY"
-              title="Explore our Categories"
-              description="Find the perfect SinkCare product for your needs."
-            />
-
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
-              <CategoryCard
-                category={{ name: "Skincare", image: "/images/products/skincare.jpg" }}
-              />
-              <CategoryCard
-                category={{ name: "Makeup", image: "/images/products/makeup.jpg" }}
-              />
-              <CategoryCard
-                category={{ name: "Body Care", image: "/images/products/bodycare.jpg" }}
-              />
-              <CategoryCard
-                category={{ name: "Hair Care", image: "/images/products/haircare.jpg" }}
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] shadow-xl bg-pink-100">
+              <img
+                src="src/assets/images/p1 (Copy).png"
+                alt="Model holding skincare"
+                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
               />
             </div>
           </section>
 
-          {/* Lightweight Contact CTA Banner */}
-          <section className="mt-16 w-full">
-            <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-[#FFF5F6] p-8 sm:p-10 md:flex-row">
-              <div className="text-center md:text-left">
-                <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
-                  Have Questions About Our Products?
-                </h3>
-                <p className="mt-2 text-sm text-gray-600 sm:text-base">
-                  We're here to help you find the best skincare routine for your natural glow.
+          {/* SECTION 2: BRAND INTRODUCTION */}
+          <section className="py-10 md:py-12 border-y border-pink-50">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] shadow-xl bg-pink-50 order-2 md:order-1">
+                <img
+                  src="src/assets/images/p2.jpg"
+                  alt="Skincare products lineup"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="space-y-6 order-1 md:order-2">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-medium uppercase text-gray-800 sm:text-base lg:text-lg">Brand Introduction</span>
+                </div>
+                <h2 className="text-2xl font-bold leading-tight text-[#F66B87] sm:text-3xl lg:text-4xl">
+                  Nature’s Care, Our Promise
+                </h2>
+                <p className="text-sm leading-6 text-gray-500 sm:text-base">
+                  SinkCare is a Cambodian skincare brand that brings together the wisdom of nature and the richness of traditional ingredients. We create gentle, safe, and effective skincare products that help you feel confident in your natural beauty.
+                </p>
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-gray-100">
+                  <div className="flex flex-col items-center text-center space-y-2">
+                    <div className="w-12 h-12 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center">
+                      <Leaf size={20} />
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 sm:text-sm">Natural Ingredients</span>
+                  </div>
+                  <div className="flex flex-col items-center text-center space-y-2">
+                    <div className="w-12 h-12 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center">
+                      <Heart size={20} />
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 sm:text-sm">Gentle & Safe for Your Skin</span>
+                  </div>
+                  <div className="flex flex-col items-center text-center space-y-2">
+                    <div className="w-12 h-12 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center">
+                      <ShieldCheck size={20} />
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 sm:text-sm">Made in Banteay Meanchey</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 3: ROOTED IN TRADITION (Target for "Our Story" click) */}
+          <section id="our-story" className="scroll-mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-10 md:py-12">
+            <div className="space-y-6">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium uppercase text-gray-800 sm:text-base lg:text-lg">Our Story</span>
+              </div>
+              <h2 className="text-2xl font-bold leading-tight text-[#F66B87] sm:text-3xl lg:text-4xl">
+                Rooted in Tradition, Inspired by Nature
+              </h2>
+              <p className="text-sm leading-6 text-gray-500 sm:text-base">
+                Our journey began in Banteay Meanchey, a place known for its rich natural resources and deep cultural heritage. Inspired by traditional Khmer skincare, we started SinkCare to share the beauty of natural ingredients with the world.
+              </p>
+              <p className="text-sm leading-6 text-gray-500 sm:text-base">
+                From local herbs to time-honored recipes, every product is made with care, supporting local communities and empowering women.
+              </p>
+            </div>
+
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] shadow-xl bg-pink-100">
+              <img
+                src="src/assets/brand name.jpeg"
+                alt="Natural beauty product showcase"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </section>
+
+          {/* SECTION 4: MISSION & VALUES */}
+          <section className="bg-white py-10 md:py-12 border-t border-pink-50">
+            <div className="max-w-6xl mx-auto text-center space-y-4 mb-10 md:mb-16">
+              <div className="flex items-center justify-center space-x-2">
+                <span className="text-sm font-medium uppercase text-gray-800 sm:text-base lg:text-lg">Our Mission & Values</span>
+              </div>
+              <h2 className="text-2xl font-bold leading-tight text-[#F66B87] sm:text-3xl lg:text-4xl">
+                For a Healthier You and a Better Tomorrow
+              </h2>
+              <p className="mx-auto max-w-2xl text-sm leading-6 text-gray-500 sm:text-base">
+                We are committed to creating natural, sustainable, and effective skincare products that bring out your natural glow — today and for future generations.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+
+              {/* Value 1 */}
+              <div className="flex flex-col items-center bg-[#FFF5F6] text-center space-y-3 p-6 rounded-2xl">
+                <div className="w-16 h-16 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center shadow-sm">
+                  <Leaf size={28} />
+                </div>
+                <h3 className="font-bold text-gray-800 text-lg">Natural</h3>
+                <p className="text-sm leading-6 text-gray-500">
+                  We use pure and safe natural ingredients.
                 </p>
               </div>
 
-             {/* Email Address */}
-                    <div className="relative">
-                      <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
-                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      </span>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="Email Address *"
-                        className="w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-4 text-sm text-gray-800 placeholder-gray-400 focus:border-[#F66B87] focus:outline-none focus:ring-1 focus:ring-[#F66B87]"
-                      />
-                    </div>
+              {/* Value 2 */}
+              <div className="flex flex-col items-center bg-[#FFF5F6] text-center space-y-3 p-6 rounded-2xl">
+                <div className="w-16 h-16 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center shadow-sm">
+                  <Heart size={28} />
+                </div>
+                <h3 className="font-bold text-gray-800 text-lg">Care</h3>
+                <p className="text-sm leading-6 text-gray-500">
+                  We care for your skin, our community, and the environment.
+                </p>
+              </div>
 
-                    
-              <Link
-                to="/contact"
-                className="shrink-0 rounded-lg bg-[#F66B87] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e05571] active:scale-95"
-              >
-                Contact Us
-              </Link>
+              {/* Value 3 */}
+              <div className="flex flex-col items-center bg-[#FFF5F6] text-center space-y-3 p-6 rounded-2xl">
+                <div className="w-16 h-16 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center shadow-sm">
+                  <Users size={28} />
+                </div>
+                <h3 className="font-bold text-gray-800 text-lg">Empower</h3>
+                <p className="text-sm leading-6 text-gray-500">
+                  We empower women and support local communities.
+                </p>
+              </div>
+
+              {/* Value 4 */}
+              <div className="flex flex-col items-center bg-[#FFF5F6] text-center space-y-3 p-6 rounded-2xl">
+                <div className="w-16 h-16 rounded-full bg-[#FFF5F6] text-[#F66B87] flex items-center justify-center shadow-sm">
+                  <Sparkles size={28} />
+                </div>
+                <h3 className="font-bold text-gray-800 text-lg">Sustainable</h3>
+                <p className="text-sm leading-6 text-gray-500">
+                  We create beauty that lasts, for you and for future generations.
+                </p>
+              </div>
+
             </div>
           </section>
 
-
-          
-
         </div>
-      </main>
-       <Footer />
+      </div>
+
+      <Footer />
     </>
   );
 }
-
-export default Home;
