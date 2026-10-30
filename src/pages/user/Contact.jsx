@@ -60,7 +60,7 @@ function Contact() {
 
                                 {/* Left: Heading */}
                                 <div>
-                                    <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-pink-600">
+                                    <p className="mb-3 text-sm uppercase tracking-[0.1em] text-black">
                                         Get in touch
                                     </p>
 

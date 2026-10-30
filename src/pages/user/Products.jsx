@@ -53,7 +53,7 @@ function Products() {
   }, [products, sort]);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50  ">
 
       {/* Navbar */}
       <Navbar />
@@ -68,7 +68,7 @@ function Products() {
         <CategoryFilter />
       </div>
 
-      <main className="mx-auto max-w-7xl px-4 py-10">
+      <main className="mx-auto max-w-7xl py-8">
 
         {/* Page Heading */}
         <h2 className="mb-6 text-3xl font-bold text-pink-600">
