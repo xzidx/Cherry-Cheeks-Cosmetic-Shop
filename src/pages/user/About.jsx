@@ -10,6 +10,7 @@ export default function SkincareLanding() {
       storySection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  
 
   return (
     <>
@@ -21,7 +22,7 @@ export default function SkincareLanding() {
         <section className="max-w-7xl mx-auto py-16 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-normal tracking-wide uppercase block text-gray-800">About Us</span>
+              <span className="mb-4 text-sm font-medium text-gray-800 sm:text-base md:mt-12 lg:text-lg">About Us</span>
               {/* <div className="w-8 h-[1px] bg-gray-800"></div> */}
             </div>
             <h1 className=" -ml-1 text-4xl md:text-5xl font-bold text-[#F66B87] leading-tight">

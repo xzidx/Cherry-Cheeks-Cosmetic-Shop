@@ -124,14 +124,7 @@ export default function ProductDetail() {
     <>
       <Navbar />
 
-      {/* Banner */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen pt-4">
-        <img
-          src={banner1}
-          alt="Beauty and cosmetics banner"
-          className="h-60 w-full object-cover sm:h-80 md:h-60"
-        />
-      </div>
+      
 
       {/* Product Section */}
       <main className={`${CONTAINER} py-10`}>

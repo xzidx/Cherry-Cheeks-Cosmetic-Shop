@@ -10,9 +10,25 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("default");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredProducts = products.filter((product) => {
+  const matchesCategory =
+    selectedCategory === "all" ||
+    product.category === selectedCategory;
 
+  const matchesSearch =
+        product.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      return matchesCategory && matchesSearch;
+    });
+  // Get unique categories
+  const categories = [
+    ...new Set(products.map((product) => product.category)),
+  ];
   // Fetch all products from JSON
   useEffect(() => {
+   
     async function loadProducts() {
       try {
         const response = await fetch("/data/products.json");
@@ -35,22 +51,22 @@ function Products() {
 
   // Sort products
   const sorted = useMemo(() => {
-    const list = [...products];
+  const list = [...filteredProducts];
 
-    if (sort === "low") {
-      list.sort((a, b) => Number(a.price) - Number(b.price));
-    }
+  if (sort === "low") {
+    list.sort((a, b) => Number(a.price) - Number(b.price));
+  }
 
-    if (sort === "high") {
-      list.sort((a, b) => Number(b.price) - Number(a.price));
-    }
+  if (sort === "high") {
+    list.sort((a, b) => Number(b.price) - Number(a.price));
+  }
 
-    if (sort === "name") {
-      list.sort((a, b) => a.name.localeCompare(b.name));
-    }
+  if (sort === "name") {
+    list.sort((a, b) => a.name.localeCompare(b.name));
+  }
 
-    return list;
-  }, [products, sort]);
+  return list;
+}, [filteredProducts, sort]);
 
   return (
     <div className="min-h-screen bg-slate-50  ">
@@ -60,12 +76,26 @@ function Products() {
 
       {/* Search Bar */}
       <div className="mx-auto max-w-7xl py-10">
-        <SearchBar />
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+        />
       </div>
 
       {/* Category Filter */}
       <div className="mx-auto w-full max-w-[1350px] px-4 sm:px-6 lg:px-8">
-        <CategoryFilter />
+        <CategoryFilter
+            categories={categories.map((category) => ({
+              id: category,
+              label: category,
+              count: products.filter(
+                (product) => product.category === category
+              ).length,
+            }))}
+            selected={selectedCategory}
+            onChange={setSelectedCategory}
+            totalCount={products.length}
+          />
       </div>
 
       <main className="mx-auto max-w-7xl py-8">
@@ -100,7 +130,7 @@ function Products() {
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {sorted.map((product) => (
+           {sorted.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
