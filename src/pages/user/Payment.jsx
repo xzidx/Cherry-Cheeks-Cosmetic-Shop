@@ -26,8 +26,8 @@ export default function CheckoutPage() {
         {/* HEADER SECTION */}
         <div className="max-w-7xl mx-auto  mb-10">
             <div className="flex items-center space-x-2 mb-2">
-                <span className="text-xs font-bold tracking-widest text-pink-500 uppercase">Checkout</span>
-                <div className="w-8 h-[1px] bg-pink-300"></div>
+                <span className="text-base tracking-widest text-black uppercase">Checkout</span>
+               
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
                 Complete Your Purchase
@@ -289,7 +289,7 @@ export default function CheckoutPage() {
                 >
                   <div className="flex items-center justify-between">
                     <input type="radio" checked={selectedPayment === 'cod'} readOnly className="accent-pink-500" />
-                    <Truck size={18} className="text-pink-500" />
+                    <Truck size={18} className="text-[#F66B87]" />
                   </div>
                   <div>
                     <span className="text-xs font-bold block text-slate-800">Cash on Delivery</span>
@@ -300,7 +300,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Submit Button */}
-              <button className="w-full bg-pink-400 hover:bg-pink-500 text-white font-medium py-3.5 rounded-xl shadow-lg shadow-pink-200 transition-all flex items-center justify-center space-x-2 text-sm mt-4 cursor-pointer">
+              <button className="w-full bg-[#F66B87] text-white font-medium py-3.5 rounded-xl shadow-lg shadow-pink-200 transition-all flex items-center justify-center space-x-2 text-sm mt-4 cursor-pointer">
                 <Lock size={16} />
                 <span>Continue to Payment</span>
                 <span>→</span>
