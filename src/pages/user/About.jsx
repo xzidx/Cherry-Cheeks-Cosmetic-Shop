@@ -1,6 +1,7 @@
 import React from 'react';
 import { Leaf, Heart, ShieldCheck, Users, Sparkles, Award } from 'lucide-react';
 import Navbar from '../../components/shared/Navbar';
+import Footer from '../../components/shared/Footer';
 
 export default function SkincareLanding() {
   const scrollToOurStory = () => {
@@ -185,6 +186,7 @@ export default function SkincareLanding() {
         </section>
 
       </div>
+      <Footer/>
     </>
   );
   
