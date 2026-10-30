@@ -94,7 +94,7 @@ function Home() {
               label="FEATURED PRODUCTS"
               title="Our Best Sellers"
             />
-            <ProductGrid />
+            <ProductGrid limit={5} />
           </section>
 
           {/* Hero 2: image on the left on desktop */}
