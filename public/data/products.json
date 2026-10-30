@@ -45,55 +45,64 @@
     "id": 7,
     "name": "Melixir Vegan Lip",
     "price": 19.99,
-    "image": "/images/products/Melixir Vegan Lip.png"
+    "image": "/images/products/Melixir Vegan Lip.png",
+    "category": "Makeup"
   },
   {
     "id": 8,
     "name": "CreamMagnolia",
     "price": 15.99,
-    "image": "/images/products/CreamMagnolia.png"
+    "image": "/images/products/CreamMagnolia.png",
+    "category":"Makeup"
   },
   {
     "id":9,
     "name": "Snail Mucin Essence",
     "price": 18.99,
-    "image": "/images/products/Snail Mucin Essence.png"
+    "image": "/images/products/Snail Mucin Essence.png",
+    "category":"Skincare"
   },
   {
     "id":10,
     "name": "Hydro Boost Gel Cream",
     "price": 16.99,
-    "image": "/images/products/Hydro Boost Gel Cream.png"
+    "image": "/images/products/Hydro Boost Gel Cream.png",
+    "category":"Skincare"
   },
   {
     "id":11,
     "name": "Matte Lip Tint",
     "price": 15.99,
-    "image": "/images/products/Matte Lip Tint.png"
+    "image": "/images/products/Matte Lip Tint.png",
+    "category":"Makeup"
   },
   {
     "id":12,
     "name": "Niacinamide Serum",
     "price": 13.99,
-    "image": "/images/products/Niacinamide Serum.png"
+    "image": "/images/products/Niacinamide Serum.png",
+    "category":"Skincare"
   },
   {
     "id":13,
     "name": "Micellar Cleansing Water",
     "price": 8.99,
-    "image": "/images/products/Micellar Cleansing Water.png"
+    "image": "/images/products/Micellar Cleansing Water.png",
+    "category":"Skincare"
   },
   {
     "id":14,
     "name": "Fit Me Foundation",
     "price": 14.99,
-    "image": "/images/products/Fit Me Foundation.png"
+    "image": "/images/products/Fit Me Foundation.png",
+    "category":"Skincare"
   },
   {
     "id":15,
     "name": "Kaja Juicy Glass Lip",
     "price": 19.99,
-    "image": "/images/products/Kaja Juicy Glass Lip.png"
+    "image": "/images/products/Kaja Juicy Glass Lip.png",
+    "category":"Makeup"
   }
 
 
