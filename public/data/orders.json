@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ORD-001",
+    "user": "Sokha",
+    "volume": "30ml",
+    "category": "Hydrating Serum",
+    "branch": "Phnom Penh",
+    "quantity": 2,
+    "payment": "Cash on Delivery",
+    "status": "Completed"
+  },
+  {
+    "id": "ORD-003",
+    "user": "Sophea",
+    "volume": "100ml",
+    "category": "Sunscreen",
+    "branch": "Phnom Penh",
+    "quantity": 3,
+    "payment": "Cash on Delivery",
+    "status": "Pending"
+  },
+  {
+    "id": "ORD-004",
+    "user": "Vanna",
+    "volume": "30ml",
+    "category": "Hydrating Serum",
+    "branch": "Battambang",
+    "quantity": 1,
+    "payment": "Cash on Delivery",
+    "status": "Completed"
+  },
+  {
+    "id": "ORD-005",
+    "user": "Malis",
+    "volume": "50ml",
+    "category": "Cleansing Foam",
+    "branch": "Phnom Penh",
+    "quantity": 2,
+    "payment": "Cash on Delivery",
+    "status": "Pending"
+  }
+]

@@ -8,15 +8,21 @@ import Payment from "../pages/user/Payment";
 import AdminLayout from "../layouts/AdminLayout";
 import AdminRoutes from "./AdminRoutes";
 import Contact from "../pages/user/Contact";
+import Login from "../pages/user/Login";
+import Register from "../pages/user/Register";
+import ProductDetail from "../pages/user/ProductDetail";
 function AppRoutes() {
   return (
     <Routes>
       {/* User Pages */}
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/shop" element={<Products />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/payment" element={<Payment />} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/register" element={<Register/>} />
+       <Route path="/payment" element={<Payment />} />
       
 
       {/* Admin Pages */}
