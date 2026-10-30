@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -6,24 +7,29 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
+
 import logo from "../../assets/logo.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) =>
-    `inline-block whitespace-nowrap transition-colors duration-200 hover:text-pink-600 ${
-      isActive ? "text-pink-600" : "text-gray-700"
+    `relative py-2 text-sm font-medium transition-colors duration-200
+    ${
+      isActive
+        ? "text-[#F66B87] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-[#F66B87]"
+        : "text-gray-600 hover:text-[#F66B87]"
     }`;
 
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-sm">
-      {/* Main Navbar Container */}
-      <div className="mx-auto flex w-full max-w-[1350px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 border-b border-gray-100 bg-white shadow-sm">
 
-        {/* Brand Logo */}
+      {/* MAIN NAVBAR */}
+      <div className="mx-auto flex w-full max-w-[1350px] items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+
+        {/* LOGO */}
         <Link
           to="/"
           onClick={closeMenu}
@@ -32,13 +38,14 @@ function Navbar() {
           <img
             src={logo}
             alt="Cherry Cheeks"
-            className="-ml-3 h-16 w-auto object-contain sm:-ml-4 sm:h-[72px] lg:-ml-5 lg:h-20"
+            className="h-14 w-auto object-contain sm:h-16 lg:h-[72px]"
           />
         </Link>
 
-        {/* Desktop Navigation - Laptop and Desktop */}
-        <div className="hidden items-center gap-6 lg:flex xl:gap-8">
-          <NavLink to="/" className={navLinkClass}>
+        {/* DESKTOP NAVIGATION */}
+        <div className="hidden items-center gap-7 lg:flex xl:gap-9">
+
+          <NavLink to="/" end className={navLinkClass}>
             Home
           </NavLink>
 
@@ -53,47 +60,64 @@ function Navbar() {
           <NavLink to="/contact" className={navLinkClass}>
             Contact
           </NavLink>
+
         </div>
 
-        {/* Cart and Account - Laptop and Desktop */}
-        <div className="hidden items-center gap-5 lg:flex">
+        {/* DESKTOP ACTIONS */}
+        <div className="hidden items-center gap-3 lg:flex">
+
+          {/* CART */}
           <Link
-            to="/payment"
+            to="/cart"
             aria-label="Shopping cart"
-            className="text-xl text-gray-700 transition-colors hover:text-pink-600"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF5F6] text-lg text-gray-700 transition hover:bg-[#F66B87] hover:text-white"
           >
             <FiShoppingCart />
           </Link>
 
+          {/* LOGIN */}
           <Link
             to="/login"
-            className="flex items-center gap-2 whitespace-nowrap text-gray-700 transition-colors hover:text-pink-600"
+            className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:border-[#F66B87] hover:bg-[#FFF5F6] hover:text-[#F66B87]"
           >
-            <FiUser />
-            <span>Login</span>
+            <FiUser className="text-base" />
+            Login
           </Link>
+
         </div>
 
-        {/* Mobile and Tablet Menu Button */}
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          className="flex items-center justify-center p-2 text-2xl text-gray-700 transition-colors hover:text-pink-600 lg:hidden"
+          aria-controls="mobile-navigation"
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-2xl text-gray-700 transition hover:bg-[#FFF5F6] hover:text-[#F66B87] lg:hidden"
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
+
       </div>
 
-      {/* Mobile and Tablet Navigation Menu */}
+      {/* MOBILE AND TABLET MENU */}
       {menuOpen && (
-        <div className="border-t border-gray-100 bg-white py-5 lg:hidden">
-          <div className="mx-auto flex w-full max-w-[1350px] flex-col gap-5 px-4 sm:px-6 lg:px-8">
+        <div
+          id="mobile-navigation"
+          className="border-t border-gray-100 bg-white lg:hidden"
+        >
+          <div className="mx-auto flex w-full max-w-[1350px] flex-col gap-1 px-4 py-5 sm:px-6 lg:px-8">
 
             <NavLink
               to="/"
-              className={navLinkClass}
+              end
+              className={({ isActive }) =>
+                `rounded-lg px-4 py-3 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-[#FFF5F6] text-[#F66B87]"
+                    : "text-gray-600 hover:bg-[#FFF5F6] hover:text-[#F66B87]"
+                }`
+              }
               onClick={closeMenu}
             >
               Home
@@ -101,7 +125,13 @@ function Navbar() {
 
             <NavLink
               to="/products"
-              className={navLinkClass}
+              className={({ isActive }) =>
+                `rounded-lg px-4 py-3 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-[#FFF5F6] text-[#F66B87]"
+                    : "text-gray-600 hover:bg-[#FFF5F6] hover:text-[#F66B87]"
+                }`
+              }
               onClick={closeMenu}
             >
               Products
@@ -109,7 +139,13 @@ function Navbar() {
 
             <NavLink
               to="/about"
-              className={navLinkClass}
+              className={({ isActive }) =>
+                `rounded-lg px-4 py-3 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-[#FFF5F6] text-[#F66B87]"
+                    : "text-gray-600 hover:bg-[#FFF5F6] hover:text-[#F66B87]"
+                }`
+              }
               onClick={closeMenu}
             >
               About
@@ -117,37 +153,45 @@ function Navbar() {
 
             <NavLink
               to="/contact"
-              className={navLinkClass}
+              className={({ isActive }) =>
+                `rounded-lg px-4 py-3 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-[#FFF5F6] text-[#F66B87]"
+                    : "text-gray-600 hover:bg-[#FFF5F6] hover:text-[#F66B87]"
+                }`
+              }
               onClick={closeMenu}
             >
               Contact
             </NavLink>
 
-            {/* Cart and Login - Mobile and Tablet */}
-            <div className="flex items-center gap-6 border-t border-gray-100 pt-4">
+            {/* MOBILE ACTIONS */}
+            <div className="mt-3 flex items-center gap-3 border-t border-gray-100 pt-4">
+
               <Link
                 to="/cart"
                 onClick={closeMenu}
-                aria-label="Shopping cart"
-                className="flex items-center gap-2 text-gray-700 transition-colors hover:text-pink-600"
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#FFF5F6] px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-[#F66B87] hover:text-white"
               >
-                <FiShoppingCart className="text-xl" />
-                <span>Cart</span>
+                <FiShoppingCart className="text-lg" />
+                Cart
               </Link>
 
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="flex items-center gap-2 text-gray-700 transition-colors hover:text-pink-600"
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium text-gray-700 transition hover:border-[#F66B87] hover:bg-[#FFF5F6] hover:text-[#F66B87]"
               >
-                <FiUser className="text-xl" />
-                <span>Login</span>
+                <FiUser className="text-lg" />
+                Login
               </Link>
+
             </div>
 
           </div>
         </div>
       )}
+
     </nav>
   );
 }

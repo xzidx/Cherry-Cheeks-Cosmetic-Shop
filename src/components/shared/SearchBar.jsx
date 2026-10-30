@@ -1,32 +1,34 @@
+
 import { FiSearch, FiX } from "react-icons/fi";
 
-function SearchBar({ searchTerm, onSearchChange }) {
+function SearchBar({ value = "", onChange }) {
   return (
     <div className="w-full">
-      <div className="flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 transition-colors focus-within:border-pink-500 focus-within:ring-2 focus-within:ring-pink-100">
+      <div className="flex w-full items-center gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 transition focus-within:border-[#F66B87]">
+
         {/* Search Icon */}
         <FiSearch
-          className="shrink-0 text-xl text-gray-400"
+          className="shrink-0 text-lg text-gray-400"
           aria-hidden="true"
         />
 
         {/* Search Input */}
         <input
           type="search"
-          value={searchTerm}
-          onChange={(event) => onSearchChange(event.target.value)}
+          value={value}
+          onChange={(event) => onChange?.(event.target.value)}
           placeholder="Search cosmetic products..."
           aria-label="Search cosmetic products by name"
-          className="w-full min-w-0 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400 sm:text-base"
+          className="w-full min-w-0 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
         />
 
         {/* Clear Search Button */}
-        {searchTerm && (
+        {value && (
           <button
             type="button"
-            onClick={() => onSearchChange("")}
+            onClick={() => onChange?.("")}
             aria-label="Clear search"
-            className="shrink-0 rounded-full p-1 text-gray-400 transition-colors hover:bg-pink-50 hover:text-pink-600"
+            className="shrink-0 rounded-lg p-1 text-gray-400 transition hover:bg-[#FFF5F6] hover:text-[#F66B87]"
           >
             <FiX className="text-lg" />
           </button>

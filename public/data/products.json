@@ -33,5 +33,75 @@
     "price": 22.99,
     "image": "/images/products/VitaminCSerum.jpg",
     "category": "Skincare"
+  },
+  {
+    "id": 1,
+    "name": "Hydrating Face Cream",
+    "price": 15.99,
+    "image": "/images/products/Hydrating.jpg",
+    "category": "Skincare"
+  },
+  {
+    "id": 2,
+    "name": "Rose Lipstick",
+    "price": 9.99,
+    "image": "/images/products/RoseLipstick.jpg",
+    "category": "Bodycare"
+  },
+  {
+    "id": 3,
+    "name": "Facial Cleanser",
+    "price": 12.5,
+    "image": "/images/products/FacialCleanser.jpg",
+    "category": "Skincare"
+  },
+  {
+    "id": 4,
+    "name": "Blush Palette",
+    "price": 18.99,
+    "image": "/images/products/BlushPalette.jpg",
+    "category": "Makeup"
+  },
+  {
+    "id": 5,
+    "name": "Vitamin C Serum",
+    "price": 22.99,
+    "image": "/images/products/VitaminCSerum.jpg",
+    "category": "Skincare"
+  },
+  {
+    "id": 1,
+    "name": "Hydrating Face Cream",
+    "price": 15.99,
+    "image": "/images/products/Hydrating.jpg",
+    "category": "Skincare"
+  },
+  {
+    "id": 2,
+    "name": "Rose Lipstick",
+    "price": 9.99,
+    "image": "/images/products/RoseLipstick.jpg",
+    "category": "Makeup"
+  },
+  {
+    "id": 3,
+    "name": "Facial Cleanser",
+    "price": 12.5,
+    "image": "/images/products/FacialCleanser.jpg",
+    "category": "Skincare"
+  },
+  {
+    "id": 4,
+    "name": "Blush Palette",
+    "price": 18.99,
+    "image": "/images/products/BlushPalette.jpg",
+    "category": "Makeup"
+  },
+  {
+    "id": 5,
+    "name": "Vitamin C Serum",
+    "price": 22.99,
+    "image": "/images/products/VitaminCSerum.jpg",
+    "category": "Skincare"
   }
 ]

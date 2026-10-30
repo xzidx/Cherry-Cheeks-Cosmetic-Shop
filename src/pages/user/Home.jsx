@@ -1,183 +1,205 @@
+
 import React from "react";
-import { Link } from "react-router-dom"; // Or your router's link component
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
 import Navbar from "../../components/shared/Navbar";
 import ProductGrid from "../../components/user/ProductGrid";
 import CategoryCard from "../../components/user/CategoryCard";
-import skincareImage from "../../assets/home-product.png";
 import Footer from "../../components/shared/Footer";
+import skincareImage from "../../assets/home-product.png";
 
-/* Reusable section heading: same style everywhere */
 function SectionHeading({ label, title, description }) {
   return (
-    <>
-      <h2 className="mb-4 text-sm font-medium text-gray-800 sm:text-base lg:text-lg">
+    <div className="mb-6">
+      <p className="mb-2 text-sm font-medium uppercase tracking-wider text-[#F66B87]">
         {label}
-      </h2>
-
-      <p className="mb-6 text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
-        {title}
       </p>
 
+      <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">
+        {title}
+      </h2>
+
       {description && (
-        <p className="mb-6 text-sm leading-6 text-gray-500 sm:text-base">
+        <p className="mt-2 text-sm text-gray-500 sm:text-base">
           {description}
         </p>
       )}
-    </>
-  );
-}
-
-/* Reusable hero: set reverse to put the image on the left on desktop */
-function Hero({ label, title, description, image, imageAlt, reverse = false, className = "" }) {
-  return (
-    <div
-      className={`flex flex-col items-center justify-between gap-8 py-6 md:py-10 ${
-        reverse ? "md:flex-row-reverse" : "md:flex-row"
-      } ${className}`}
-    >
-      {/* Text Section */}
-      <div className="mb-6 mt-6 w-full md:mb-12 md:mt-12 md:w-1/2">
-        <h2 className="mb-4 text-sm font-medium text-gray-800 sm:text-base md:mt-12 lg:text-lg">
-          {label}
-        </h2>
-
-        <p className="mb-6 text-2xl font-bold text-[#F66B87] sm:text-3xl lg:text-4xl">
-          {title}
-        </p>
-
-        <p className="mb-6 text-sm leading-6 text-gray-500 sm:text-base">
-          {description}
-        </p>
-
-        <button className="rounded-lg bg-[#F66B87] px-6 py-3 text-white transition hover:bg-[#e05571]">
-          Shop Now
-        </button>
-      </div>
-
-      {/* Image Section */}
-      <div className="flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg sm:h-[280px] md:h-[250px] md:w-1/2 lg:h-[320px]">
-        <img
-          src={image}
-          alt={imageAlt}
-          className="h-full w-full object-cover object-center"
-        />
-      </div>
     </div>
   );
 }
 
 function Home() {
   return (
-    <>
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
 
-      <main className="py-8">
-        {/* Main Container: same padding as the Navbar */}
-        <div className="mx-auto w-full max-w-[1350px] px-4 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-[1350px] px-4 py-8 sm:px-6 lg:px-8">
 
-          {/* Hero 1: image on the right */}
-          <Hero
-            label="NATURAL SKINCARE"
-            title={
-              <>
-                Pure Care <br />
+        {/* Hero Section */}
+        <section className="mb-12 grid items-center gap-8 overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 sm:p-8 md:grid-cols-2 lg:p-10">
+
+          <div>
+            <p className="mb-3 text-sm font-medium uppercase tracking-wider text-[#F66B87]">
+              Natural Skincare
+            </p>
+
+            <h1 className="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-5xl">
+              Pure Care
+              <br />
+              <span className="text-[#F66B87]">
                 for Your Natural Glow
-              </>
-            }
-            description="SinkCare brings you the goodness of nature with traditional Cambodian ingredients. Gentle, safe, and effective skincare for healthy, radiant skin."
-            image={skincareImage}
-            imageAlt="Natural skincare products"
+              </span>
+            </h1>
+
+            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-500 sm:text-base">
+              SinkCare brings you the goodness of nature with
+              traditional Cambodian ingredients. Gentle, safe,
+              and effective skincare for healthy, radiant skin.
+            </p>
+
+            <Link
+              to="/shop"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#F66B87] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#e05571]"
+            >
+              Shop Now
+              <ArrowRight size={17} />
+            </Link>
+          </div>
+
+          <div className="h-[250px] overflow-hidden rounded-xl sm:h-[320px] lg:h-[380px]">
+            <img
+              src={skincareImage}
+              alt="Natural skincare products"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </section>
+
+        {/* Featured Products */}
+        <section className="mb-12">
+          <SectionHeading
+            label="Featured Products"
+            title="Our Best Sellers"
+            description="Discover our favorite products for your everyday beauty routine."
           />
 
-          {/* Featured Products */}
-          <section className="mt-12 w-full">
-            <SectionHeading
-              label="FEATURED PRODUCTS"
-              title="Our Best Sellers"
-            />
-            <ProductGrid limit={5} />
-          </section>
+          <ProductGrid limit={5} />
 
-          {/* Hero 2: image on the left on desktop */}
-          <Hero
-            className="mt-12"
-            reverse
-            label="NATURAL SKINCARE"
-            title="Get 30% Off Your First Order"
-            description="SinkCare brings you the goodness of nature with traditional Cambodian ingredients. Gentle, safe, and effective skincare for healthy, radiant skin."
-            image={skincareImage}
-            imageAlt="Natural skincare products"
+          <div className="mt-8 text-center">
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#F66B87] bg-white px-6 py-2.5 text-sm font-medium text-[#F66B87] transition hover:bg-[#F66B87] hover:text-white"
+            >
+              View All Products
+              <ArrowRight size={17} />
+            </Link>
+          </div>
+        </section>
+
+        {/* Promotion */}
+        <section className="mb-12 grid items-center gap-6 rounded-2xl border border-pink-100 bg-white p-6 sm:p-8 md:grid-cols-2">
+
+          <div>
+            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-[#F66B87]">
+              Special Offer
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">
+              Get 30% Off Your First Order
+            </h2>
+
+            <p className="mt-3 text-sm leading-6 text-gray-500">
+              Discover your favorite skincare products and
+              enjoy a little extra care for your skin.
+              Start your beauty journey with SinkCare today.
+            </p>
+
+            <Link
+              to="/shop"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#F66B87] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#e05571]"
+            >
+              Shop Now
+              <ArrowRight size={17} />
+            </Link>
+          </div>
+
+          <div className="h-[220px] overflow-hidden rounded-xl sm:h-[280px]">
+            <img
+              src={skincareImage}
+              alt="SinkCare skincare collection"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </section>
+
+        {/* Categories */}
+        <section className="mb-12">
+          <SectionHeading
+            label="Shop By Category"
+            title="Explore Our Categories"
+            description="Find the perfect products for your beauty and skincare needs."
           />
 
-          {/* Shop by Category */}
-          <section className="mt-12 w-full">
-            <SectionHeading
-              label="SHOP BY CATEGORY"
-              title="Explore our Categories"
-              description="Find the perfect SinkCare product for your needs."
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+            <CategoryCard
+              category={{
+                name: "Skincare",
+                image: "/images/products/skincare.jpg",
+              }}
             />
 
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
-              <CategoryCard
-                category={{ name: "Skincare", image: "/images/products/skincare.jpg" }}
-              />
-              <CategoryCard
-                category={{ name: "Makeup", image: "/images/products/makeup.jpg" }}
-              />
-              <CategoryCard
-                category={{ name: "Body Care", image: "/images/products/bodycare.jpg" }}
-              />
-              <CategoryCard
-                category={{ name: "Hair Care", image: "/images/products/haircare.jpg" }}
-              />
-            </div>
-          </section>
+            <CategoryCard
+              category={{
+                name: "Makeup",
+                image: "/images/products/makeup.jpg",
+              }}
+            />
 
-          {/* Lightweight Contact CTA Banner */}
-          <section className="mt-16 w-full">
-            <div className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-[#FFF5F6] p-8 sm:p-10 md:flex-row">
-              <div className="text-center md:text-left">
-                <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
-                  Have Questions About Our Products?
-                </h3>
-                <p className="mt-2 text-sm text-gray-600 sm:text-base">
-                  We're here to help you find the best skincare routine for your natural glow.
-                </p>
-              </div>
+            <CategoryCard
+              category={{
+                name: "Body Care",
+                image: "/images/products/bodycare.jpg",
+              }}
+            />
 
-             {/* Email Address */}
-                    <div className="relative">
-                      <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
-                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      </span>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="Email Address *"
-                        className="w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-4 text-sm text-gray-800 placeholder-gray-400 focus:border-[#F66B87] focus:outline-none focus:ring-1 focus:ring-[#F66B87]"
-                      />
-                    </div>
+            <CategoryCard
+              category={{
+                name: "Hair Care",
+                image: "/images/products/haircare.jpg",
+              }}
+            />
+          </div>
+        </section>
 
-                    
-              <Link
-                to="/contact"
-                className="shrink-0 rounded-lg bg-[#F66B87] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e05571] active:scale-95"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </section>
+        {/* Contact */}
+        <section className="mb-8 rounded-xl border border-gray-100 bg-white p-6 text-center sm:p-10">
+          <p className="mb-2 text-sm font-medium uppercase tracking-wider text-[#F66B87]">
+            Need Help?
+          </p>
 
+          <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">
+            Have Questions About Our Products?
+          </h2>
 
-          
+          <p className="mx-auto mt-3 max-w-xl text-sm text-gray-500 sm:text-base">
+            We are here to help you find the best products
+            for your skincare routine.
+          </p>
 
-        </div>
+          <Link
+            to="/contact"
+            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#F66B87] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#e05571]"
+          >
+            Contact Us
+            <ArrowRight size={17} />
+          </Link>
+        </section>
+
       </main>
-       <Footer />
-    </>
+
+      <Footer />
+    </div>
   );
 }
 

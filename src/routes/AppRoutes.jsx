@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/user/Home";
 import About from "../pages/user/About";
 import Products from "../pages/user/Products";
-import Payment from "../pages/user/Payment";
+import Payment from "../pages/user/payment.jsx";
 
 import AdminLayout from "../layouts/AdminLayout";
 import AdminRoutes from "./AdminRoutes";
