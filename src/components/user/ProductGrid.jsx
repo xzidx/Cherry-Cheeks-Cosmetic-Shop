@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 
-function ProductGrid() {
+function ProductGrid({ limit }) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadProducts() {
       try {
-        const response = await fetch("/student-data/products.json");
+        const response = await fetch("/data/products.json");
 
         if (!response.ok) {
           throw new Error("Failed to load products");
@@ -41,10 +41,13 @@ function ProductGrid() {
       </p>
     );
   }
+   const displayedProducts = limit
+    ? products.slice(0, limit)
+    : products;
 
   return (
     <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {products.map((product) => (
+      {displayedProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>

@@ -1,53 +1,25 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import Navbar from "../../components/shared/Navbar";
+import Footer from "../../components/shared/Footer";
+
 import banner1 from "../../assets/banner.jpg";
 import gallery1 from "../../assets/care banner.avif";
 import gallery2 from "../../assets/carrrrere.jpeg";
 import gallery3 from "../../assets/new 1.jpg";
 
-import Navbar from "../../components/shared/Navbar";
-import Footer from "../../components/shared/Footer";
-
-// Same container for the banner and the product section, so their edges line up
 const CONTAINER = "mx-auto w-full max-w-7xl px-4";
 
-// TODO: replace with real data (API) later
-const PRODUCT = {
-  id: 1,
-  category: "Beauty & Cosmetics",
-  name: "Lan Come Lipstick",
-  price: 39.0,
-  rating: 4,
-  reviews: 1,
-  shortDescription:
-    "Long-lasting lipstick with a rich, creamy finish that glides on smoothly and keeps lips comfortable all day.",
-  shade: "Rosy Red",
-  images: [gallery1, gallery2, gallery3],
-  description:
-    "This lipstick delivers bold, vibrant colour with a comfortable, creamy formula. Its smooth texture glides on evenly and stays put for hours without drying out your lips.",
-  features: [
-    "Rich, long-lasting colour",
-    "Creamy, lightweight texture",
-    "Hydrating formula",
-    "Smudge-resistant finish",
-    "Suitable for all skin tones",
-    "Cruelty-free",
-  ],
-  highlights: ["Ready to ship", "30-day easy return", "100% authentic product"],
-};
-
-const RELATED = [
-  { id: 11, name: "Lan Come Lipstick", category: "Lipstick", price: 30.0, oldPrice: 39.0, rating: 4, image: "https://placehold.co/400x400/fce7f3/be185d?text=Lipstick" },
-  { id: 12, name: "Lan Come Lipstick", category: "Lipstick", price: 32.0, oldPrice: 39.0, rating: 5, image: "https://placehold.co/400x400/fbcfe8/be185d?text=Lipstick" },
-  { id: 13, name: "Lan Come Lipstick", category: "Lipstick", price: 33.0, oldPrice: 42.0, rating: 4, image: "https://placehold.co/400x400/f9a8d4/831843?text=Lipstick" },
-  { id: 14, name: "Lan Come Lipstick", category: "Lipstick", price: 35.0, oldPrice: 45.0, rating: 4, image: "https://placehold.co/400x400/fce7f3/be185d?text=Lipstick" },
-  { id: 15, name: "Lan Come Lipstick", category: "Lipstick", price: 36.0, oldPrice: 45.0, rating: 5, image: "https://placehold.co/400x400/fbcfe8/be185d?text=Lipstick" },
-];
-
-function Stars({ value }) {
+function Stars({ value = 0 }) {
   return (
-    <div className="flex items-center gap-0.5 text-sm" aria-label={`${value} out of 5 stars`}>
+    <div className="flex items-center gap-0.5 text-sm">
       {[1, 2, 3, 4, 5].map((n) => (
-        <span key={n} className={n <= value ? "text-amber-400" : "text-gray-300"}>
+        <span
+          key={n}
+          className={n <= value ? "text-amber-400" : "text-gray-300"}
+        >
           ★
         </span>
       ))}
@@ -56,39 +28,125 @@ function Stars({ value }) {
 }
 
 export default function ProductDetail() {
+  const { id } = useParams();
+
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const [activeImage, setActiveImage] = useState(0);
   const [qty, setQty] = useState(1);
 
-  const decrease = () => setQty((q) => Math.max(1, q - 1));
-  const increase = () => setQty((q) => q + 1);
+  // Fetch products from JSON
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const response = await fetch("/data/products.json");
 
-  // total = unit price x quantity (recalculated every time qty changes)
-  const total = PRODUCT.price * qty;
+        if (!response.ok) {
+          throw new Error("Failed to load products");
+        }
+
+        const data = await response.json();
+
+        setProducts(data);
+
+        const selectedProduct = data.find(
+          (item) => String(item.id) === String(id)
+        );
+
+        if (!selectedProduct) {
+          setError("Product not found.");
+          return;
+        }
+
+        setProduct(selectedProduct);
+      } catch (err) {
+        console.error("Error loading products:", err);
+        setError("Unable to load product details.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, [id]);
+
+  // Reset image and quantity when product changes
+  useEffect(() => {
+    setActiveImage(0);
+    setQty(1);
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="py-20 text-center text-gray-500">
+        Loading product details...
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="py-20 text-center">
+        <p className="text-lg text-gray-500">
+          {error || "Product not found."}
+        </p>
+      </div>
+    );
+  }
+
+  // Use product gallery if available, otherwise use the main image
+  const images = product.images?.length
+    ? product.images
+    : product.image
+      ? [product.image]
+      : [gallery1, gallery2, gallery3];
+
+  const price = Number(product.price) || 0;
+  const total = price * qty;
+
+  // Get related products from the same JSON file
+  const relatedProducts = products
+    .filter((item) => String(item.id) !== String(product.id))
+    .slice(0, 5);
+
+  const decrease = () => {
+    setQty((q) => Math.max(1, q - 1));
+  };
+
+  const increase = () => {
+    setQty((q) => q + 1);
+  };
 
   return (
-    <>  
+    <>
       <Navbar />
 
       {/* Banner */}
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen pt-4">
-  <img
-    src={banner1}
-    alt="Beauty and cosmetics banner"
-    className="h-60 w-full object-cover sm:h-80 md:h-60"
-  />
-</div>
-      {/* Product section */}
+        <img
+          src={banner1}
+          alt="Beauty and cosmetics banner"
+          className="h-60 w-full object-cover sm:h-80 md:h-60"
+        />
+      </div>
+
+      {/* Product Section */}
       <main className={`${CONTAINER} py-10`}>
         <section className="grid grid-cols-1 gap-10 md:grid-cols-2">
-          {/* Gallery */}
+
+          {/* Product Gallery */}
           <div className="min-w-0">
             <img
-              src={PRODUCT.images[activeImage]}
-              alt={PRODUCT.name}
+              src={images[activeImage]}
+              alt={product.name}
               className="aspect-square w-full rounded-2xl bg-pink-50 object-cover"
             />
+
             <div className="mt-4 grid grid-cols-3 gap-3">
-              {PRODUCT.images.map((src, i) => (
+              {images.slice(0, 3).map((src, i) => (
                 <button
                   key={i}
                   type="button"
@@ -100,38 +158,62 @@ export default function ProductDetail() {
                       : "opacity-70 hover:opacity-100"
                   }`}
                 >
-                  <img src={src} alt="" className="aspect-square w-full object-cover" />
+                  <img
+                    src={src}
+                    alt=""
+                    className="aspect-square w-full object-cover"
+                  />
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Info */}
+          {/* Product Information */}
           <div className="min-w-0">
             <p className="text-xs font-medium uppercase tracking-wide text-pink-500">
-              {PRODUCT.category}
+              {product.category}
             </p>
-            <h1 className="mt-1 text-3xl font-bold text-gray-900">{PRODUCT.name}</h1>
-            <p className="mt-2 text-2xl font-bold text-pink-500">${PRODUCT.price.toFixed(2)}</p>
+
+            <h1 className="mt-1 text-3xl font-bold text-gray-900">
+              {product.name}
+            </h1>
+
+            <p className="mt-2 text-2xl font-bold text-pink-500">
+              ${price.toFixed(2)}
+            </p>
 
             <div className="mt-2 flex items-center gap-2">
-              <Stars value={PRODUCT.rating} />
-              <span className="text-xs text-gray-500">({PRODUCT.reviews} review)</span>
-            </div>
-
-            <p className="mt-4 text-sm leading-relaxed text-gray-600">{PRODUCT.shortDescription}</p>
-
-            {/* Shade */}
-            <div className="mt-5">
-              <p className="mb-2 text-sm font-medium text-gray-800">Shade</p>
-              <span className="inline-block rounded-md bg-pink-100 px-3 py-1 text-sm font-medium text-pink-600">
-                {PRODUCT.shade}
+              <Stars value={Number(product.rating) || 0} />
+              <span className="text-xs text-gray-500">
+                ({product.reviews || 0} reviews)
               </span>
             </div>
 
+            <p className="mt-4 text-sm leading-relaxed text-gray-600">
+              {product.shortDescription ||
+                product.description ||
+                "Discover this product from Cherry Cheeks."}
+            </p>
+
+            {/* Shade - only show when available */}
+            {product.shade && (
+              <div className="mt-5">
+                <p className="mb-2 text-sm font-medium text-gray-800">
+                  Shade
+                </p>
+
+                <span className="inline-block rounded-md bg-pink-100 px-3 py-1 text-sm font-medium text-pink-600">
+                  {product.shade}
+                </span>
+              </div>
+            )}
+
             {/* Quantity */}
             <div className="mt-5">
-              <p className="mb-2 text-sm font-medium text-gray-800">Quantity</p>
+              <p className="mb-2 text-sm font-medium text-gray-800">
+                Quantity
+              </p>
+
               <div className="inline-flex items-center rounded-lg border border-gray-300">
                 <button
                   type="button"
@@ -141,7 +223,11 @@ export default function ProductDetail() {
                 >
                   −
                 </button>
-                <span className="min-w-10 px-3 text-center text-sm font-medium">{qty}</span>
+
+                <span className="min-w-10 px-3 text-center text-sm font-medium">
+                  {qty}
+                </span>
+
                 <button
                   type="button"
                   onClick={increase}
@@ -153,15 +239,18 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            {/* Total price */}
+            {/* Total Price */}
             <div className="mt-5 flex items-center justify-between rounded-xl bg-pink-50 px-4 py-3">
               <div>
                 <p className="text-xs text-gray-500">Total</p>
                 <p className="text-xs text-gray-500">
-                  {qty} × ${PRODUCT.price.toFixed(2)}
+                  {qty} × ${price.toFixed(2)}
                 </p>
               </div>
-              <p className="text-2xl font-bold text-pink-600">${total.toFixed(2)}</p>
+
+              <p className="text-2xl font-bold text-pink-600">
+                ${total.toFixed(2)}
+              </p>
             </div>
 
             {/* Actions */}
@@ -172,6 +261,7 @@ export default function ProductDetail() {
               >
                 Add to Cart · ${total.toFixed(2)}
               </button>
+
               <button
                 type="button"
                 className="w-full rounded-lg border border-pink-500 py-3 text-sm font-semibold text-pink-500 transition hover:bg-pink-50"
@@ -182,62 +272,103 @@ export default function ProductDetail() {
 
             {/* Description */}
             <div className="mt-8 border-t border-gray-100 pt-6">
-              <h2 className="text-base font-bold text-gray-900">Description</h2>
-              <p className="mt-2 text-sm leading-relaxed text-gray-600">{PRODUCT.description}</p>
-              <p className="mt-3 text-sm font-medium text-gray-800">Key features</p>
-              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-gray-600">
-                {PRODUCT.features.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+              <h2 className="text-base font-bold text-gray-900">
+                Description
+              </h2>
+
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                {product.description ||
+                  product.shortDescription ||
+                  "No product description available."}
+              </p>
+
+              {product.features?.length > 0 && (
+                <>
+                  <p className="mt-3 text-sm font-medium text-gray-800">
+                    Key features
+                  </p>
+
+                  <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-gray-600">
+                    {product.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
 
             {/* Highlights */}
-            <div className="mt-6 rounded-lg border border-gray-100 bg-gray-50 p-4">
-              <h2 className="mb-2 text-sm font-bold text-gray-900">Why you'll love it</h2>
-              <ul className="space-y-2">
-                {PRODUCT.highlights.map((h) => (
-                  <li key={h} className="flex items-center gap-2 text-sm text-gray-700">
-                    <span className="text-pink-500">✓</span>
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {product.highlights?.length > 0 && (
+              <div className="mt-6 rounded-lg border border-gray-100 bg-gray-50 p-4">
+                <h2 className="mb-2 text-sm font-bold text-gray-900">
+                  Why you'll love it
+                </h2>
+
+                <ul className="space-y-2">
+                  {product.highlights.map((highlight, index) => (
+                    <li
+                      key={index}
+                      className="flex items-center gap-2 text-sm text-gray-700"
+                    >
+                      <span className="text-pink-500">✓</span>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* You may also like */}
+        {/* Related Products */}
         <section className="mt-16">
-          <h2 className="mb-6 text-xl font-bold text-gray-900">You may also like</h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-            {RELATED.map((p) => (
-              <article
-                key={p.id}
-                className="relative overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition hover:shadow-md"
-              >
-                <span className="absolute left-2 top-2 rounded bg-pink-500 px-2 py-0.5 text-[10px] font-bold uppercase text-white">
-                  Sale
-                </span>
-                <img src={p.image} alt={p.name} className="aspect-square w-full object-cover" />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold text-gray-800">{p.name}</h3>
-                  <p className="text-xs text-gray-500">{p.category}</p>
-                  <Stars value={p.rating} />
-                  <p className="mt-1 text-sm">
-                    <span className="font-bold text-pink-500">${p.price.toFixed(2)}</span>{" "}
-                    <span className="text-xs text-gray-400 line-through">${p.oldPrice.toFixed(2)}</span>
-                  </p>
-                  <button
-                    type="button"
-                    className="mt-2 w-full rounded-md bg-pink-500 py-1.5 text-xs font-medium text-white transition hover:bg-pink-600"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
+          <h2 className="mb-6 text-xl font-bold text-gray-900">
+            You may also like
+          </h2>
+
+          {relatedProducts.length === 0 ? (
+            <p className="text-sm text-gray-500">
+              No related products available.
+            </p>
+          ) : (
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+              {relatedProducts.map((item) => (
+                <article
+                  key={item.id}
+                  className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition hover:shadow-md"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="aspect-square w-full object-cover"
+                  />
+
+                  <div className="p-3">
+                    <h3 className="text-sm font-semibold text-gray-800">
+                      {item.name}
+                    </h3>
+
+                    <p className="text-xs text-gray-500">
+                      {item.category}
+                    </p>
+
+                    <Stars value={Number(item.rating) || 0} />
+
+                    <p className="mt-1 text-sm font-bold text-pink-500">
+                      ${Number(item.price).toFixed(2)}
+                    </p>
+
+                    <button
+                      type="button"
+                      className="mt-2 w-full rounded-md bg-pink-500 py-1.5 text-xs font-medium text-white transition hover:bg-pink-600"
+                    >
+                      View Product
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
       </main>
 
