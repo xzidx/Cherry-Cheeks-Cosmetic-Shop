@@ -1,6 +1,15 @@
 import Button from "../shared/Button";
+import { useState } from "react";
+
 
 function ProductCard({ product, onAddToCart }) {
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
+  const handleAddToCart = () => {
+    onAddToCart?.(product);
+    setIsAddedToCart(true);
+  };
+
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-shadow duration-300 hover:shadow-lg">
       {/* Product Image */}
@@ -29,7 +38,7 @@ function ProductCard({ product, onAddToCart }) {
 
         <Button
           className="w-full"
-          onClick={() => onAddToCart?.(product)}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </Button>

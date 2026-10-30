@@ -1,45 +1,40 @@
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 
-const products = [
-  {
-    id: 1,
-    name: "Hydrating Face Cream",
-    price: 15.99,
-    image: "https://placehold.co/400x400?text=Face+Cream",
-    category: "Skincare",
-  },
-  {
-    id: 2,
-    name: "Rose Lipstick",
-    price: 9.99,
-    image: "https://placehold.co/400x400?text=Lipstick",
-    category: "Makeup",
-  },
-  {
-    id: 3,
-    name: "Facial Cleanser",
-    price: 12.5,
-    image: "https://placehold.co/400x400?text=Cleanser",
-    category: "Skincare",
-  },
-  {
-    id: 4,
-    name: "Blush Palette",
-    price: 18.99,
-    image: "https://placehold.co/400x400?text=Blush",
-    category: "Makeup",
-  },
-  {
-    id: 5,
-    name: "Vitamin C Serum",
-    price: 22.99,
-    image: "https://placehold.co/400x400?text=Vitamin+C+Serum",
-    category: "Skincare",
-  },
-];
+function ProductGrid() {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-function ProductGrid({ products: productList = products }) {
-  if (productList.length === 0) {
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const response = await fetch("/student-data/products.json");
+
+        if (!response.ok) {
+          throw new Error("Failed to load products");
+        }
+
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <p className="py-10 text-center text-gray-500">
+        Loading products...
+      </p>
+    );
+  }
+
+  if (products.length === 0) {
     return (
       <p className="py-10 text-center text-gray-500">
         No products available.
@@ -49,7 +44,7 @@ function ProductGrid({ products: productList = products }) {
 
   return (
     <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {productList.map((product) => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
