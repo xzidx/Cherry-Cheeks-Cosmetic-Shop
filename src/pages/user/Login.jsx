@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Mail,
@@ -10,10 +9,12 @@ import {
   ShieldCheck,
   Heart,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const [form, setForm] = useState({
@@ -34,8 +35,8 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Connect your login API here.
-    console.log("Login information:", form);
+    // Navigate to Settings page
+    navigate("/settings");
   };
 
   const inputClass =

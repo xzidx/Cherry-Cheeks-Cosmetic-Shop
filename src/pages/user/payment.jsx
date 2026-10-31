@@ -14,11 +14,13 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar";
 import { useCart } from "../../context/CartContext";
 
 export default function CheckoutPage() {
- 
+  const navigate = useNavigate();
+
   const [selectedPayment, setSelectedPayment] = useState("card");
 
   const { cartItems } = useCart();
@@ -469,6 +471,7 @@ export default function CheckoutPage() {
               <button
                 type="button"
                 disabled={cartItems.length === 0}
+                onClick={() => navigate("/products")}
                 className="mt-4 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-xl bg-[#F66B87] py-3.5 text-sm font-medium text-white shadow-lg shadow-pink-200 transition-all hover:bg-[#e05571] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Lock size={16} />

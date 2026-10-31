@@ -1,13 +1,12 @@
 
 import React, { useState } from "react";
 import { ShoppingBag, Sparkles, Tag } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CartItem from "../../components/user/CartItem";
 import Navbar from "../../components/shared/Navbar";
 import Footer from "../../components/shared/Footer";
 import { useCart } from "../../context/CartContext";
-
 
 const PROMO_CODES = {
   GLOW10: 0.1,
@@ -15,6 +14,8 @@ const PROMO_CODES = {
 };
 
 function OrderSummary({ items = [] }) {
+  const navigate = useNavigate();
+
   const [promo, setPromo] = useState("");
   const [discountRate, setDiscountRate] = useState(0);
   const [message, setMessage] = useState("");
