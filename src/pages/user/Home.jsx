@@ -112,7 +112,7 @@ function Home() {
             <p className="mt-3 text-sm leading-6 text-gray-500">
               Discover your favorite skincare products and
               enjoy a little extra care for your skin.
-              Start your beauty journey with SinkCare today.
+              Start your beauty journey with SkinCare today.
             </p>
 
             <Link
