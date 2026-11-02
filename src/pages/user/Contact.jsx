@@ -325,7 +325,7 @@ function Contact() {
               </h2>
 
               <p className="mt-2 text-sm leading-6 text-gray-500 sm:text-base">
-                Thank you for choosing SinkCare. Your natural beauty
+                Thank you for choosing SkinCare. Your natural beauty
                 matters to us.
               </p>
             </div>
