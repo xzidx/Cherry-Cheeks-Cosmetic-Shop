@@ -36,7 +36,7 @@ export default function Login() {
     e.preventDefault();
 
     // Navigate to Settings page
-    navigate("/settings");
+    navigate("/admin/dashboard");
   };
 
   const inputClass =

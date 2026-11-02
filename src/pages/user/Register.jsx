@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Mail,
@@ -13,10 +12,12 @@ import {
   Heart,
 } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
@@ -61,8 +62,8 @@ export default function Register() {
 
     setError("");
 
-    // Connect your registration API here.
-    console.log("Register submitted:", formData);
+    // Go to Settings page
+    navigate("/settings");
   };
 
   const inputClass =

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 import {
   ShoppingCart,
   ShieldCheck,
@@ -69,7 +70,8 @@ function PageMessage({ message }) {
 
 export default function ProductDetail() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -166,6 +168,11 @@ export default function ProductDetail() {
     setQty((q) => q + 1);
   };
 
+  const handleAddToCart = () => {
+    for (let i = 0; i < qty; i++) {
+      addToCart(product);
+    }
+  };
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
@@ -320,16 +327,18 @@ export default function ProductDetail() {
             {/* Action Buttons */}
             <div className="mt-6 space-y-3">
 
-              <button
-                type="button"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#F66B87] py-3.5 text-sm font-semibold text-white transition hover:bg-[#e05571]"
-              >
-                <ShoppingCart size={18} />
-                Add to Cart · ${total.toFixed(2)}
-              </button>
+               <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#F66B87] py-3.5 text-sm font-semibold text-white transition hover:bg-[#e05571]"
+                >
+                  <ShoppingCart size={18} />
+                  Add to Cart · ${total.toFixed(2)}
+                </button>
 
               <button
                 type="button"
+                onClick={() => navigate("/cart")}
                 className="w-full rounded-lg border border-[#F66B87] bg-white py-3.5 text-sm font-semibold text-[#F66B87] transition hover:bg-pink-50"
               >
                 Buy Now
