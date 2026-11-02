@@ -36,6 +36,7 @@ function Dashboard() {
           {/* find and category */}
         <div>
           <SearchBar />
+          <div className="mt-8"></div>
           <CategoryFilter />
         </div>
 
